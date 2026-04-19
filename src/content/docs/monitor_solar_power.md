@@ -10,10 +10,10 @@ With the lights set up and working, next I wanted to add monitoring of different
 
 ## What you'll need
 
-- **[Renogy Rover Charge Controller](https://www.amazon.com/gp/product/B07DNVW37B)** — I have the 30A version. This setup should work with any charge controller in the Rover series.
-- **[USB Serial Dongle](https://www.amazon.com/gp/product/B00IDSM6BW)** — For serial communication from the Raspberry Pi to the charge controller.
-- **[DB9 to RJ12 Adapter](https://www.amazon.com/gp/product/B0054RRCHI)** — The charge controller uses a non-standard serial pinout, so this adapter is needed.
-- **[RJ12 Cable](https://www.amazon.com/gp/product/B08BHVF6XS)** — To connect the adapter to the charge controller.
+- **[Renogy Rover Charge Controller](https://amzn.to/4vAuCeE)** — I have the 30A version. This setup should work with any charge controller in the Rover series.
+- **[USB Serial Dongle](https://amzn.to/4vvL7IE)** — For serial communication from the Raspberry Pi to the charge controller.
+- **[DB9 to RJ12 Adapter](https://amzn.to/4dTBgpX)** — The charge controller uses a non-standard serial pinout, so this adapter is needed.
+- **[RJ12 Cable](https://amzn.to/3Q9Ok0p)** — To connect the adapter to the charge controller.
 
 ## Building the cable
 

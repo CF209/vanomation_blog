@@ -10,12 +10,12 @@ Before we can do anything else, we need to get the Raspberry Pi set up and runni
 
 ## What you'll need
 
-- **[Raspberry Pi](https://www.amazon.com/gp/product/B07TC2BK1X)** — I'm using the Raspberry Pi 4 with 4GB RAM. The Pi 3 should also work, but the 4 is recommended.
-- **[USB Outlet](https://www.amazon.com/gp/product/B08K8Q74XL)** — Must be capable of delivering 3A at 5V. The USB-C output from this one works.
-- **[USB Cable](https://www.amazon.com/gp/product/B01GGKZ1VA)** — Any USB-C cable should work.
-- **[Micro SD Card](https://www.amazon.com/gp/product/B07G3GMRYF)** — Ideally Application Class 2 (handles small I/O better). 32 GB or larger recommended.
-- **[Router](https://www.amazon.com/gp/product/B01N5RCZQH)** — I chose the TP-Link AC750 because it's cheap and has WiFi-as-WAN, letting me use my phone's hotspot or nearby WiFi for internet.
-- **Laptop** — Any Windows/Mac/Linux machine with an SD card reader. If you don't have one, [a cheap USB adapter works fine](https://www.amazon.com/Vanja-Adapter-Portable-Memory-Reader/dp/B07P7FRYG3).
+- **[Raspberry Pi](https://amzn.to/4sDRFlU)** — I'm using the Raspberry Pi 4 with 4GB RAM. The Pi 3 should also work, but the 4 is recommended.
+- **[USB Outlet](https://amzn.to/3OpCT43)** — Must be capable of delivering 3A at 5V. The USB-C output from this one works.
+- **[USB Cable](https://amzn.to/4sAVxEf)** — Any USB-C cable should work.
+- **[Micro SD Card](https://amzn.to/4vugovB)** — Ideally Application Class 2 (handles small I/O better). 32 GB or larger recommended.
+- **[Router](https://amzn.to/4vwnwaW)** — I chose the TP-Link AC750 because it's cheap and has WiFi-as-WAN, letting me use my phone's hotspot or nearby WiFi for internet.
+- **Laptop** — Any Windows/Mac/Linux machine with an SD card reader. If you don't have one, [a cheap USB adapter works fine](https://amzn.to/3Qo04wi).
 
 ## Step 1 — Flash Raspberry Pi OS
 

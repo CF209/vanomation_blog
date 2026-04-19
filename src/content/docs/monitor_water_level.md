@@ -10,10 +10,10 @@ The next thing I wanted to monitor was the amount of water in my freshwater tank
 
 ## What you'll need
 
-- **[20-Gallon Water Tank](https://www.amazon.com/ICON-12460-Filler-WT2460-20-Gallon/dp/B01MR55AEA)** — Any water tank with a flat top should work. Shorter tanks may have less accurate results.
-- **[KUS Water Level Sensor](https://www.amazon.com/gp/product/B00Y831XA6)** — I used the 15" sensor. For plastic tanks, use a sensor 1" shorter than the tank height.
+- **[20-Gallon Water Tank](https://amzn.to/4tMoApi)** — Any water tank with a flat top should work. Shorter tanks may have less accurate results.
+- **[KUS Water Level Sensor](https://amzn.to/4823c7e)** — I used the 15" sensor. For plastic tanks, use a sensor 1" shorter than the tank height.
 - **[Water Sensor Flange](https://kus-usa.com/product/fls-u/)** — Needed to mount the sensor to the tank.
-- **[40mm Hole Saw](https://www.amazon.com/gp/product/B07R5S27GC)** — To cut a hole in the top of the water tank.
+- **[40mm Hole Saw](https://amzn.to/4dOjlRs)** — To cut a hole in the top of the water tank.
 - **ADC Electronics** — I designed a custom PCB using an ESP8266. See below for details.
 
 ## Step 1 — Install the sensor
@@ -57,7 +57,7 @@ KiCad files: [Water Sensor KiCad Files](https://github.com/CF209/kicad/tree/main
 
 For the initial programming, I use this USB serial adapter — I designed the board so the adapter fits directly into J5 header pins. Hold S1 while inserting:
 
-[FT232 USB to TTL Serial Adapter](https://www.amazon.com/gp/product/B07BBPX8B8)
+[FT232 USB to TTL Serial Adapter](https://amzn.to/4cRIrxM)
 
 ![Programming the board via serial adapter](/img/water/water9.jpg)
 

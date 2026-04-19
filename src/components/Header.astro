@@ -1,0 +1,238 @@
+---
+import config from 'virtual:starlight/user-config';
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import Search from 'virtual:starlight/components/Search';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+
+const shouldRenderSearch =
+  config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+
+const tutorialSlugs = [
+  '/setting_up_raspberry_pi/',
+  '/installing_home_assistant/',
+  '/control_the_lights/',
+  '/add_wireless_switches/',
+  '/monitor_solar_power/',
+  '/monitor_water_level/',
+  '/monitor_propane_level/',
+  '/adding_van_tilt_sensor/',
+  '/autolocking_drawers/',
+  '/future_projects/',
+];
+const isTutorial = tutorialSlugs.includes(Astro.url.pathname);
+
+const tutorials = [
+  { label: 'Setting up the Raspberry Pi', href: '/setting_up_raspberry_pi/' },
+  { label: 'Installing Home Assistant',   href: '/installing_home_assistant/' },
+  { label: 'Controlling the Lights',      href: '/control_the_lights/' },
+  { label: 'Adding Wireless Switches',    href: '/add_wireless_switches/' },
+  { label: 'Monitoring Solar Power',      href: '/monitor_solar_power/' },
+  { label: 'Monitoring Water Level',      href: '/monitor_water_level/' },
+  { label: 'Monitoring Propane Level',    href: '/monitor_propane_level/' },
+  { label: 'Adding a Van Tilt Sensor',    href: '/adding_van_tilt_sensor/' },
+  { label: 'Auto-Locking Drawers',        href: '/autolocking_drawers/' },
+  { label: 'Future Projects',             href: '/future_projects/' },
+];
+---
+
+<div class="header">
+  <div class="title-wrapper sl-flex">
+    <SiteTitle {...Astro.props} />
+  </div>
+
+  <div class="search-wrapper print:hidden">
+    {shouldRenderSearch && <Search {...Astro.props} />}
+  </div>
+
+  {!isTutorial && (
+    <div class="tutorials-dropdown print:hidden">
+      <button class="tutorials-btn" aria-haspopup="true" aria-expanded="false" id="tutorials-btn">
+        Tutorials
+        <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+          <path d="M6 8L1 3h10L6 8z"/>
+        </svg>
+      </button>
+      <ul class="tutorials-menu" role="menu" id="tutorials-menu">
+        {tutorials.map(t => (
+          <li role="none">
+            <a href={t.href} role="menuitem">{t.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  <div class="sl-hidden md:sl-flex print:hidden right-group">
+    <div class="sl-flex social-icons">
+      <SocialIcons {...Astro.props} />
+    </div>
+    <ThemeSelect {...Astro.props} />
+    <LanguageSelect {...Astro.props} />
+  </div>
+</div>
+
+<style>
+  @layer starlight.core {
+    .header {
+      display: flex;
+      gap: var(--sl-nav-gap);
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .title-wrapper {
+      overflow: clip;
+      padding: 0.25rem;
+      margin: -0.25rem;
+      min-width: 0;
+    }
+
+    /* Search fills all available space */
+    .search-wrapper {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .right-group,
+    .social-icons {
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .social-icons::after {
+      content: '';
+      height: 2rem;
+      border-inline-end: 1px solid var(--sl-color-gray-5);
+    }
+
+    @media (min-width: 50rem) {
+      :global(:root[data-has-sidebar]) {
+        --__sidebar-pad: calc(2 * var(--sl-nav-pad-x));
+      }
+      :global(:root:not([data-has-toc])) {
+        --__toc-width: 0rem;
+      }
+      .header {
+        --__sidebar-width: max(0rem, var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x));
+        --__main-column-fr: calc(
+          (
+              100% + var(--__sidebar-pad, 0rem) - var(--__toc-width, var(--sl-sidebar-width)) -
+                (2 * var(--__toc-width, var(--sl-nav-pad-x))) - var(--sl-content-inline-start, 0rem) -
+                var(--sl-content-width)
+            ) / 2
+        );
+        display: grid;
+        grid-template-columns:
+          minmax(
+            calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))),
+            auto
+          )
+          1fr
+          auto
+          auto;
+        align-content: center;
+      }
+    }
+  }
+
+  /* ── Tutorials dropdown ── */
+  .tutorials-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .tutorials-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: none;
+    color: var(--sl-color-text);
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.375rem;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .tutorials-btn:hover {
+    background: var(--sl-color-bg-nav);
+    color: var(--sl-color-accent);
+  }
+
+  .tutorials-btn svg {
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .tutorials-btn[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  .tutorials-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    inset-inline-end: 0;
+    background: var(--sl-color-bg);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    list-style: none;
+    margin: 0;
+    padding: 0.375rem;
+    min-width: 16rem;
+    z-index: 100;
+  }
+
+  .tutorials-menu.open {
+    display: block;
+  }
+
+  .tutorials-menu a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    color: var(--sl-color-text);
+    font-size: var(--sl-text-sm);
+    text-decoration: none;
+    transition: background 0.12s, color 0.12s;
+  }
+
+  .tutorials-menu a:hover {
+    background: var(--sl-color-bg-nav);
+    color: var(--sl-color-accent);
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('tutorials-btn');
+  const menu = document.getElementById('tutorials-menu');
+
+  btn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = menu?.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+
+  document.addEventListener('click', () => {
+    menu?.classList.remove('open');
+    btn?.setAttribute('aria-expanded', 'false');
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      menu?.classList.remove('open');
+      btn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>

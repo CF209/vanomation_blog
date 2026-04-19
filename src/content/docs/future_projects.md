@@ -14,7 +14,7 @@ It would be cool to tap into the door locking mechanism so I could lock and unlo
 
 ## Adding battery charge monitoring
 
-I currently have a [Renogy Battery Monitor](https://www.amazon.com/Renogy-500A-Battery-Monitor-Programmable/dp/B07RP5B5P7/) installed, but it doesn't have any smart capabilities and I couldn't find a way to hack into it. The easiest path would be replacing it with the [Victron SmartShunt](https://www.amazon.com/Victron-SmartShunt-500AMP-Bluetooth-Battery/dp/B0856PHNLX/?th=1), which I should be able to read via Bluetooth on the Raspberry Pi.
+I currently have a [Renogy Battery Monitor](https://amzn.to/4vv5CVU) installed, but it doesn't have any smart capabilities and I couldn't find a way to hack into it. The easiest path would be replacing it with the [Victron SmartShunt](https://amzn.to/3ODw6ns), which I should be able to read via Bluetooth on the Raspberry Pi.
 
 ## Accessing Home Assistant remotely
 
@@ -32,6 +32,3 @@ I recently switched from an old smartphone to a Kindle Fire tablet for the main 
 
 I haven't spent much time on the Lovelace interface in Home Assistant, but I've seen some very polished setups from the community. It would be great to create a more aesthetically pleasing interface. The only custom element I've built so far is the [van tilt card](/adding_van_tilt_sensor/).
 
----
-
-**Back to the beginning:** [Setting up the Raspberry Pi →](/setting_up_raspberry_pi/)

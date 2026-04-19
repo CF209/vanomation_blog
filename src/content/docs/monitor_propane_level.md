@@ -11,7 +11,7 @@ Next up was a monitoring system for my propane tank. I have a standard 20lb prop
 ## What you'll need
 
 - **[20lb Propane Tank](https://www.homedepot.com/p/Worthington-20-lbs-Empty-Propane-Tank-309791/202034840)** — Any standard 20lb tank should work. Other sizes could work with modifications to the script.
-- **[Mopeka Bluetooth Propane Sensor](https://www.amazon.com/gp/product/B01C5RQJHS)** — The only wireless propane sensor I've been able to find.
+- **[Mopeka Bluetooth Propane Sensor](https://amzn.to/4eiogKw)** — The only wireless propane sensor I've been able to find.
 
 ## The problem
 

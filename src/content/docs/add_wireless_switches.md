@@ -10,8 +10,8 @@ With the lights set up through Home Assistant I could control them from my phone
 
 ## What you'll need
 
-- **[Aqara Wireless Mini Switch](https://www.amazon.com/gp/product/B07D19YXND)** — Wireless and battery powered, easy to install anywhere.
-- **[Zigbee USB Dongle](https://www.amazon.com/gp/product/B07KW1N1MR)** — The Raspberry Pi doesn't have Zigbee built in. This is a cheap option that works well for my use case. It comes with the programming adapter which is needed.
+- **[Aqara Wireless Mini Switch](https://amzn.to/4msdFia)** — Wireless and battery powered, easy to install anywhere.
+- **[Zigbee USB Dongle](https://amzn.to/4vL3aee)** — The Raspberry Pi doesn't have Zigbee built in. This is a cheap option that works well for my use case. It comes with the programming adapter which is needed.
 - **[CC Debugger](https://www.amazon.com/gp/product/B07T13JX32)** — Used to program the Zigbee dongle with the correct firmware.
 
 ## Step 1 — Flash the Zigbee dongle

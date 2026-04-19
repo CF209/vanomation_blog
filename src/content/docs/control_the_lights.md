@@ -10,11 +10,11 @@ With Home Assistant installed we can now add a first interface: control of the l
 
 ## What you'll need
 
-- **[Raspberry Pi Starter Kit](https://www.amazon.com/gp/product/B06WP7169Y)** — If you're new to electronics, a starter kit comes with basic components, wires, a breadboard, and a GPIO extension board useful for prototyping.
-- **[Soldering Iron](https://www.amazon.com/ANBES-Soldering-Iron-Kit-Electronics/dp/B06XZ31W3M)** — A basic kit will do.
-- **[Multimeter](https://www.amazon.com/Fluke-101-Multimeter-Resistance-Capacitance/dp/B00HE6MIJY)** — Always check for shorts before powering circuits. I upgraded to Fluke after a cheaper one failed.
-- **[N-Channel MOSFETs](https://www.amazon.com/gp/product/B07CTF1JVD)** — Used to switch the lights on and off.
-- **[12V LED Lights](https://www.amazon.com/gp/product/B012ZOI3ZW)** — The lights I use in my van.
+- **[Raspberry Pi Starter Kit](https://amzn.to/3OfQY4d)** — If you're new to electronics, a starter kit comes with basic components, wires, a breadboard, and a GPIO extension board useful for prototyping.
+- **[Soldering Iron](https://amzn.to/428lQa0)** — A basic kit will do.
+- **[Multimeter](https://amzn.to/3QlkplV)** — Always check for shorts before powering circuits. I upgraded to Fluke after a cheaper one failed.
+- **[N-Channel MOSFETs](https://amzn.to/4sAcrTo)** — Used to switch the lights on and off.
+- **[12V LED Lights](https://amzn.to/4sTrnfP)** — The lights I use in my van.
 
 ## The circuit
 

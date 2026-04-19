@@ -10,7 +10,7 @@ One of the biggest issues with my van build has been the drawers flying open whi
 
 ## What you'll need
 
-- **[Solenoid Door Latch](https://www.amazon.com/gp/product/B07TJN2XNN/)** — This was the only one I found that met all my requirements: 12V, unlocked when unpowered, door-style latch (not a cylinder), and relatively low power.
+- **[Solenoid Door Latch](https://amzn.to/3OjqLBS)** — This was the only one I found that met all my requirements: 12V, unlocked when unpowered, door-style latch (not a cylinder), and relatively low power.
 - **Other electronics** — An ESP32 or ESP8266 (or the Raspberry Pi), plus an N-Channel MOSFET, diode, and resistor.
 
 ## How a solenoid works
