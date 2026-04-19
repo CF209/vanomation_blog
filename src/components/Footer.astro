@@ -1,10 +1,11 @@
 ---
 import Default from '@astrojs/starlight/components/Footer.astro';
+const showComments = Astro.url.pathname.startsWith('/tutorials/');
 ---
 
 <Default {...Astro.props}><slot /></Default>
 
-<div class="giscus-wrapper">
+{showComments && <div class="giscus-wrapper">
   <!--
     SETUP REQUIRED: To enable comments, follow these steps:
     1. Create (or use an existing) GitHub repository for this site
@@ -28,4 +29,4 @@ import Default from '@astrojs/starlight/components/Footer.astro';
         crossorigin="anonymous"
         async>
 </script>
-</div>
+</div>}
