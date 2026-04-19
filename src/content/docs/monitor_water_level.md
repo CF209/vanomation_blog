@@ -1,4 +1,5 @@
 ---
+slug: monitor_water_level
 title: Monitoring Water Level
 description: Install a resistive water level sensor in your freshwater tank and read it with a custom ESP8266 PCB through ESPHome.
 sidebar:
@@ -148,7 +149,3 @@ I then added a template sensor to ESPHome that converts voltage to percentage:
 I now have a fully functional water level sensor in Home Assistant:
 
 ![Water level percentage displayed in Home Assistant](/img/water/water8.png)
-
----
-
-**Next:** [Monitoring Propane Level →](/tutorials/monitoring-propane-level/)

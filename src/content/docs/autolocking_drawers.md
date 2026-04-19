@@ -1,4 +1,5 @@
 ---
+slug: autolocking_drawers
 title: Auto-Locking Drawers
 description: Use a solenoid door latch and the van's ignition signal to automatically lock drawers when driving.
 sidebar:
@@ -22,7 +23,7 @@ This solenoid runs on 12V, draws 0.3A when powered, and is unlocked when unpower
 
 ## The circuit
 
-The circuit is nearly identical to the [light control circuit](/tutorials/controlling-the-lights/):
+The circuit is nearly identical to the [light control circuit](/control_the_lights/):
 
 ![Solenoid switching circuit with MOSFET and flyback diode](/img/drawer/drawer2.png)
 
@@ -97,7 +98,3 @@ Create automations to lock and unlock automatically. Go to **Configuration → A
 Create a second automation with the reverse — trigger when ignition turns off, action to turn the solenoid off.
 
 With the automations set up, Home Assistant automatically locks the drawer when the van starts and unlocks it when turned off. I can hear the satisfying click of the solenoid every time I start the van!
-
----
-
-**Next:** [Future Projects →](/tutorials/future-projects/)

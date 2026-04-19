@@ -1,4 +1,5 @@
 ---
+slug: control_the_lights
 title: Controlling the Lights
 description: Use N-Channel MOSFETs and Raspberry Pi GPIO pins to control and dim 12V LED lights through Home Assistant.
 sidebar:
@@ -93,7 +94,3 @@ I originally planned to use ESPHome, but the PCB uses the ESP32-C3 which wasn't 
 On first startup, the ESP32 starts in soft-AP mode and hosts a web server for configuration — WiFi network, light names, and MQTT server. With the MQTT integration in Home Assistant, the lights show up as devices automatically:
 
 ![ESP32 web configuration interface](/img/lights/lights6.png)
-
----
-
-**Next:** [Adding Wireless Switches →](/tutorials/adding-wireless-switches/)

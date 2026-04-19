@@ -1,4 +1,5 @@
 ---
+slug: installing_home_assistant
 title: Installing Home Assistant
 description: Install Home Assistant as a Docker container on the Raspberry Pi and access it from any device on your network.
 sidebar:
@@ -60,7 +61,3 @@ I originally mounted an old smartphone in the van and ran the Home Assistant app
 ![Kindle Fire tablet mounted in the van showing Home Assistant](/img/install/install4.jpg)
 
 Home Assistant isn't very useful without integrating it with the van's systems, so next we'll use it to control the lights!
-
----
-
-**Next:** [Controlling the Lights →](/tutorials/controlling-the-lights/)

@@ -1,4 +1,5 @@
 ---
+slug: adding_van_tilt_sensor
 title: Adding a Van Tilt Sensor
 description: Use an MPU6050 accelerometer with ESPHome to show the van's tilt angle in degrees on a custom Home Assistant card.
 sidebar:
@@ -20,7 +21,7 @@ Any 2 or 3-axis accelerometer works for this, but the MPU6050 is widely availabl
 
 The MPU6050 communicates via I2C. I wanted to mount it under my bed platform, which was too far from the Pi, so I used an ESP8266 to communicate with the MPU6050 and send data over WiFi.
 
-If you built the [water level sensor PCB](/tutorials/monitoring-water-level/), there's a 6-pin I2C header on that board (J1) added specifically for the MPU6050. In its default state it works with the Adafruit MPU6050 module. Closing the JP1 solder jumper also accommodates cheaper MPU6050 modules from Amazon.
+If you built the [water level sensor PCB](/monitor_water_level/), there's a 6-pin I2C header on that board (J1) added specifically for the MPU6050. In its default state it works with the Adafruit MPU6050 module. Closing the JP1 solder jumper also accommodates cheaper MPU6050 modules from Amazon.
 
 ![ESP8266 PCB with MPU6050 header highlighted](/img/tilt/tilt2.png)
 
@@ -122,7 +123,3 @@ type: 'custom:van-tilt-card'
 entity_x: sensor.filtered_x_angle
 entity_y: sensor.filtered_y_angle
 ```
-
----
-
-**Next:** [Auto-Locking Drawers →](/tutorials/autolocking-drawers/)

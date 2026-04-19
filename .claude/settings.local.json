@@ -11,7 +11,10 @@
       "Bash(kill %1)",
       "WebSearch",
       "WebFetch(domain:themefisher.com)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(grep:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:4321)"
     ]
   }
 }

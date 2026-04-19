@@ -1,6 +1,18 @@
 ---
 import Default from '@astrojs/starlight/components/Footer.astro';
-const showComments = Astro.url.pathname.startsWith('/tutorials/');
+const tutorialSlugs = [
+  '/setting_up_raspberry_pi/',
+  '/installing_home_assistant/',
+  '/control_the_lights/',
+  '/add_wireless_switches/',
+  '/monitor_solar_power/',
+  '/monitor_water_level/',
+  '/monitor_propane_level/',
+  '/adding_van_tilt_sensor/',
+  '/autolocking_drawers/',
+  '/future_projects/',
+];
+const showComments = tutorialSlugs.includes(Astro.url.pathname);
 ---
 
 <Default {...Astro.props}><slot /></Default>

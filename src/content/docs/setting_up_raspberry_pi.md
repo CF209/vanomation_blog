@@ -1,4 +1,5 @@
 ---
+slug: setting_up_raspberry_pi
 title: Setting up the Raspberry Pi
 description: Get the Raspberry Pi powered, flashed with Raspberry Pi OS, and accessible remotely over SSH.
 sidebar:
@@ -95,7 +96,3 @@ sudo apt-get upgrade
 Since the Pi can now be fully accessed remotely, you can install it somewhere out of sight. Don't make it too inaccessible though — you'll eventually be connecting to the GPIO pins and USB ports for future projects. I screwed mine into the wall of my electronics cabinet near the van's power system since it's a central location.
 
 ![Raspberry Pi mounted in van electronics cabinet](/img/raspi/raspi3.jpg)
-
----
-
-**Next:** [Installing Home Assistant →](/tutorials/installing-home-assistant/)

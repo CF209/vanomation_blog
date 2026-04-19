@@ -1,4 +1,5 @@
 ---
+slug: add_wireless_switches
 title: Adding Wireless Switches
 description: Add Zigbee wireless buttons around the van to control the lights without running any new wiring.
 sidebar:
@@ -60,7 +61,3 @@ You can follow the same steps above to add other Zigbee devices. I added this te
 [Aqara Temperature and Humidity Sensor](https://www.amazon.com/gp/product/B07D37FKGY)
 
 ![Aqara temperature and humidity sensor in the van](/img/switches/switches8.jpg)
-
----
-
-**Next:** [Monitoring Solar Power →](/tutorials/monitoring-solar-power/)

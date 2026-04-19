@@ -1,4 +1,5 @@
 ---
+slug: monitor_propane_level
 title: Monitoring Propane Level
 description: Reverse-engineer the Mopeka Tank Check Bluetooth sensor to integrate propane level readings into Home Assistant.
 sidebar:
@@ -133,7 +134,3 @@ The propane sensor can now be added to your Home Assistant dashboard:
 ![Propane level gauge card on Home Assistant dashboard](/img/propane/propane4.png)
 
 ![Propane sensor details in Home Assistant](/img/propane/propane5.png)
-
----
-
-**Next:** [Adding a Van Tilt Sensor →](/tutorials/adding-van-tilt-sensor/)

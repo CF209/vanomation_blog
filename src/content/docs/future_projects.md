@@ -1,4 +1,5 @@
 ---
+slug: future_projects
 title: Future Projects
 description: Ideas for future van automation projects including door locks, battery monitoring, remote access, and voice control.
 sidebar:
@@ -29,8 +30,8 @@ I recently switched from an old smartphone to a Kindle Fire tablet for the main 
 
 ## Improving the Lovelace interface
 
-I haven't spent much time on the Lovelace interface in Home Assistant, but I've seen some very polished setups from the community. It would be great to create a more aesthetically pleasing interface. The only custom element I've built so far is the [van tilt card](/tutorials/adding-van-tilt-sensor/).
+I haven't spent much time on the Lovelace interface in Home Assistant, but I've seen some very polished setups from the community. It would be great to create a more aesthetically pleasing interface. The only custom element I've built so far is the [van tilt card](/adding_van_tilt_sensor/).
 
 ---
 
-**Back to the beginning:** [Setting up the Raspberry Pi →](/tutorials/setting-up-raspberry-pi/)
+**Back to the beginning:** [Setting up the Raspberry Pi →](/setting_up_raspberry_pi/)

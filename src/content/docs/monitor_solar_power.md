@@ -1,4 +1,5 @@
 ---
+slug: monitor_solar_power
 title: Monitoring Solar Power
 description: Read data from a Renogy charge controller over serial and publish it to Home Assistant via MQTT.
 sidebar:
@@ -121,7 +122,3 @@ sensor:
 Restart Home Assistant and add the sensor to your dashboard:
 
 ![Solar power sensor on Home Assistant dashboard](/img/solar/solar3.png)
-
----
-
-**Next:** [Monitoring Water Level →](/tutorials/monitoring-water-level/)
