@@ -4,13 +4,13 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://vanomation.com',
+	site: 'https://van-automation.com',
 	integrations: [
 		starlight({
 			title: 'Vanomation',
 			description: 'Home automation for your campervan — tutorials for Raspberry Pi, Home Assistant, and more.',
 			social: [
-				{ icon: 'github', label: 'GitHub', href: 'https://github.com/CF209/vanomation' },
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/CF209' },
 			],
 			sidebar: [
 				{

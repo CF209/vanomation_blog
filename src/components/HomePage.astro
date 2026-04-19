@@ -1,0 +1,663 @@
+---
+const tutorials = [
+  { num: '01', title: 'Setting up the Raspberry Pi',   desc: 'Flash Raspberry Pi OS, enable SSH, and mount the Pi in the van.',                                     href: '/tutorials/setting-up-raspberry-pi/' },
+  { num: '02', title: 'Installing Home Assistant',      desc: 'Install Home Assistant as a Docker container and access it from any device.',                         href: '/tutorials/installing-home-assistant/' },
+  { num: '03', title: 'Controlling the Lights',         desc: 'Use N-Channel MOSFETs and GPIO PWM pins to control and dim 12V LED lights.',                          href: '/tutorials/controlling-the-lights/' },
+  { num: '04', title: 'Adding Wireless Switches',       desc: 'Add battery-powered Zigbee buttons anywhere in the van — no wiring required.',                        href: '/tutorials/adding-wireless-switches/' },
+  { num: '05', title: 'Monitoring Solar Power',         desc: 'Read data from a Renogy charge controller over serial and display it in Home Assistant.',             href: '/tutorials/monitoring-solar-power/' },
+  { num: '06', title: 'Monitoring Water Level',         desc: 'Install a resistive sensor in the freshwater tank and read it with a custom ESP8266 PCB.',            href: '/tutorials/monitoring-water-level/' },
+  { num: '07', title: 'Monitoring Propane Level',       desc: 'Reverse-engineer the Mopeka Bluetooth sensor to get propane readings in Home Assistant.',             href: '/tutorials/monitoring-propane-level/' },
+  { num: '08', title: 'Adding a Van Tilt Sensor',       desc: 'Use an MPU6050 accelerometer to show front/back and left/right tilt in degrees.',                    href: '/tutorials/adding-van-tilt-sensor/' },
+  { num: '09', title: 'Auto-Locking Drawers',           desc: 'Lock drawers automatically with a solenoid latch triggered by the ignition signal.',                  href: '/tutorials/autolocking-drawers/' },
+  { num: '10', title: 'Future Projects',                desc: 'Ideas for what\'s next — door locks, battery monitoring, remote access, and more.',                   href: '/tutorials/future-projects/' },
+];
+
+const features = [
+  { icon: '💡', title: 'Wireless Light Switches', desc: 'Zigbee buttons installable anywhere in the van — no wiring' },
+  { icon: '☀️', title: 'Solar Power Monitoring',  desc: 'See how much power you\'re bringing in from your solar panels' },
+  { icon: '💧', title: 'Water Tank Level',         desc: 'Monitor your freshwater tank level from your phone' },
+  { icon: '🔥', title: 'Propane Tank Level',       desc: 'Track how much propane is left in the tank' },
+  { icon: '📐', title: 'Van Tilt Sensor',          desc: 'See how flat the van is parked — front/back and side/side' },
+  { icon: '🔒', title: 'Auto-Locking Drawers',     desc: 'Drawers that lock automatically when the engine starts' },
+];
+
+const gallery = [
+  { src: '/img/van/van1.jpg',    alt: 'Van exterior' },
+  { src: '/img/ha/ha3.png',      alt: 'Home Assistant dashboard' },
+  { src: '/img/van/van2.jpg',    alt: 'Van interior' },
+  { src: '/img/ha/ha1.png',      alt: 'Home Assistant controls' },
+  { src: '/img/van/van3.jpg',    alt: 'Van on the road' },
+  { src: '/img/tilt/tilt5.png',  alt: 'Custom van tilt card' },
+];
+---
+
+<div class="hp">
+
+  <!-- ─── Hero ─────────────────────────────────────────── -->
+  <section class="hp-hero">
+    <div class="hp-hero-inner" style="background-image:url('/img/hero-bg.jpg')">
+      <div class="hp-hero-overlay"></div>
+      <div class="hp-hero-content">
+        <h1 class="hp-hero-title">Vanomation</h1>
+        <p class="hp-hero-sub">A home automation project for your campervan</p>
+        <div class="hp-hero-actions">
+          <a href="/tutorials/setting-up-raspberry-pi/" class="hp-btn-primary">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── About ────────────────────────────────────────── -->
+  <section class="hp-about">
+    <div class="hp-container">
+      <div class="hp-about-grid">
+        <div class="hp-about-text">
+          <h2>Home automation for my campervan</h2>
+          <p>
+            My name's Chris and I converted a RAM Promaster into a campervan a few years ago.
+            My time in the van is usually spent rock climbing, traveling, and adventuring
+            outdoors — but I'm also always working on projects to improve it.
+          </p>
+          <p>
+            The most recent project has been a home automation system using a Raspberry Pi
+            running Home Assistant as the central hub. I created this site
+            for my own documentation and for others who want to implement something similar
+            in their own vans.
+          </p>
+          <a href="/tutorials/setting-up-raspberry-pi/" class="hp-btn-primary" style="display:inline-block;margin-top:1rem;">
+            Start the tutorials →
+          </a>
+        </div>
+        <div class="hp-features-grid not-content">
+          {features.map(f => (
+            <div class="hp-feature">
+              <span class="hp-feature-icon">{f.icon}</span>
+              <div>
+                <h4>{f.title}</h4>
+                <p>{f.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Gallery ──────────────────────────────────────── -->
+  <section class="hp-gallery">
+    <div class="hp-container">
+      <h2 class="hp-gallery-heading not-content">Gallery</h2>
+    </div>
+
+    <div class="hp-carousel-wrap" id="hp-carousel">
+      <!-- Viewport: arrows are scoped inside here so they only cover the images -->
+      <div class="hp-carousel-viewport">
+        <div class="hp-carousel-track" id="hp-carousel-track">
+          {gallery.map((img, i) => (
+            <div class="hp-carousel-slide">
+              <img
+                src={img.src}
+                alt={img.alt}
+                loading={i < 3 ? 'eager' : 'lazy'}
+                data-src={img.src}
+                data-alt={img.alt}
+              />
+            </div>
+          ))}
+        </div>
+
+        <!-- Prev / Next arrows (inside viewport so they don't cover the dots) -->
+        <button class="hp-carousel-arrow hp-arrow-prev" id="hp-prev" aria-label="Previous">&#8249;</button>
+        <button class="hp-carousel-arrow hp-arrow-next" id="hp-next" aria-label="Next">&#8250;</button>
+      </div>
+
+      <!-- Dots -->
+      <div class="hp-carousel-dots not-content" id="hp-dots">
+        {gallery.map((_, i) => (
+          <button class="hp-carousel-dot" aria-label={`Image ${i + 1}`} data-index={String(i)} />
+        ))}
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="hp-lightbox" id="hp-lightbox" aria-hidden="true">
+      <button class="hp-lightbox-close" id="hp-lightbox-close" aria-label="Close">&#10005;</button>
+      <img class="hp-lightbox-img" id="hp-lightbox-img" src="" alt="" />
+    </div>
+  </section>
+
+  <script>
+    const wrap  = document.getElementById('hp-carousel') as HTMLElement;
+    const track = document.getElementById('hp-carousel-track') as HTMLElement;
+    const dots  = Array.from(document.querySelectorAll<HTMLButtonElement>('.hp-carousel-dot'));
+    const slides = Array.from(track.querySelectorAll<HTMLElement>('.hp-carousel-slide'));
+    const total  = slides.length;
+    const lightbox     = document.getElementById('hp-lightbox') as HTMLElement;
+    const lightboxImg  = document.getElementById('hp-lightbox-img') as HTMLImageElement;
+    const lightboxClose = document.getElementById('hp-lightbox-close') as HTMLButtonElement;
+
+    let current = 0;
+    let timer: ReturnType<typeof setInterval>;
+
+    // How many slides are visible at current viewport width
+    function getVisible(): number {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 640)  return 2;
+      return 1;
+    }
+
+    function setSlideWidths() {
+      const v = getVisible();
+      slides.forEach(s => { s.style.flex = `0 0 ${100 / v}%`; });
+    }
+
+    function render() {
+      const v = getVisible();
+      const pct = (100 / v) * current;
+      track.style.transform = `translateX(-${pct}%)`;
+
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i >= current && i < current + v);
+      });
+    }
+
+    function goTo(index: number) {
+      const v = getVisible();
+      const max = total - v;
+      // Wrap around: past the end goes to start, before the start goes to end
+      if (index > max) current = 0;
+      else if (index < 0) current = max;
+      else current = index;
+      render();
+    }
+
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 4000);
+    }
+
+    // Init
+    setSlideWidths();
+    render();
+    startTimer();
+
+    // Arrows
+    document.getElementById('hp-prev')!.addEventListener('click', () => {
+      goTo(current - 1);
+      startTimer();
+    });
+    document.getElementById('hp-next')!.addEventListener('click', () => {
+      goTo(current + 1);
+      startTimer();
+    });
+
+    // Dot clicks
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goTo(Number(dot.dataset.index));
+        startTimer();
+      });
+    });
+
+    // Resize
+    window.addEventListener('resize', () => {
+      setSlideWidths();
+      current = clamp(current);
+      render();
+    });
+
+    // Lightbox
+    slides.forEach(slide => {
+      slide.querySelector('img')!.addEventListener('click', (e) => {
+        const img = e.currentTarget as HTMLImageElement;
+        lightboxImg.src = img.dataset.src!;
+        lightboxImg.alt = img.dataset.alt!;
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImg.src = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+  <!-- ─── Tutorials ────────────────────────────────────── -->
+  <section class="hp-tutorials">
+    <div class="hp-container">
+      <h2>Tutorials</h2>
+      <div class="hp-tutorials-grid not-content">
+        {tutorials.map(t => (
+          <a href={t.href} class="hp-tut-card">
+            <span class="hp-tut-num">{t.num}</span>
+            <div>
+              <h3>{t.title}</h3>
+              <p>{t.desc}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<style>
+/* ── Reset & base ─────────────────────────────────────── */
+.hp {
+  /* Break out of Starlight's content max-width on hero/gallery */
+  overflow-x: hidden;
+}
+
+/* ── Full-bleed helper ────────────────────────────────── */
+.hp-hero,
+.hp-gallery {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+/* ── Container ────────────────────────────────────────── */
+.hp-container {
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* ─────────────────────────────────────────────────────── */
+/* Hero                                                     */
+/* ─────────────────────────────────────────────────────── */
+.hp-hero-inner {
+  position: relative;
+  min-height: 100svh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hp-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(0,0,0,.40) 100%);
+}
+
+.hp-hero-content {
+  position: relative;
+  text-align: center;
+  color: #fff;
+  padding: 2rem 1.5rem;
+  max-width: 44rem;
+}
+
+.hp-hero-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.02em;
+  color: #fff;
+  border: none;
+}
+
+.hp-hero-sub {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  margin: 0 0 2rem;
+  opacity: 0.9;
+  color: #fff;
+}
+
+.hp-hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ─────────────────────────────────────────────────────── */
+/* Shared buttons                                           */
+/* ─────────────────────────────────────────────────────── */
+.hp-btn-primary {
+  display: inline-block;
+  background: var(--sl-color-accent);
+  color: var(--sl-color-accent-high, #fff) !important;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.4rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.hp-btn-primary:hover { opacity: 0.85; text-decoration: none; }
+
+.hp-btn-secondary {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  color: #fff !important;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.4rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(4px);
+  transition: background 0.15s;
+}
+.hp-btn-secondary:hover { background: rgba(255,255,255,0.25); text-decoration: none; }
+
+/* ─────────────────────────────────────────────────────── */
+/* About                                                    */
+/* ─────────────────────────────────────────────────────── */
+.hp-about {
+  padding: 5rem 0;
+}
+
+.hp-about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .hp-about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+.hp-about-text h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+}
+
+.hp-about-text p {
+  color: var(--sl-color-gray-2);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.hp-features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 500px) {
+  .hp-features-grid { grid-template-columns: 1fr; }
+}
+
+.hp-feature {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  background: var(--sl-color-bg-nav);
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.hp-feature-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 0.1rem;
+}
+
+.hp-feature h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem !important;
+  padding: 0;
+  border: none;
+  line-height: 1.3;
+}
+
+.hp-feature p {
+  font-size: 0.8rem;
+  color: var(--sl-color-gray-3);
+  margin: 0 !important;
+  line-height: 1.5;
+}
+
+.hp-feature div {
+  min-width: 0;
+}
+
+/* ─────────────────────────────────────────────────────── */
+/* Gallery                                                  */
+/* ─────────────────────────────────────────────────────── */
+.hp-gallery {
+  background: var(--sl-color-bg-nav);
+  border-top: 1px solid var(--sl-color-hairline);
+  border-bottom: 1px solid var(--sl-color-hairline);
+  padding: 2rem 0;
+}
+
+.hp-gallery-heading {
+  margin: 0 0 1.25rem !important;
+}
+
+/* Carousel wrapper */
+.hp-carousel-wrap {
+  position: relative;
+}
+
+/* Viewport: clips the track and scopes arrows to image area only */
+.hp-carousel-viewport {
+  position: relative;
+  overflow: hidden;
+}
+
+.hp-carousel-viewport:hover .hp-carousel-arrow {
+  opacity: 1;
+}
+
+/* Sliding track */
+.hp-carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+/* Each slide */
+.hp-carousel-slide {
+  flex: 0 0 100%; /* overridden by JS for multi-image */
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.hp-carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  cursor: zoom-in;
+  background: #000;
+}
+
+/* Prev / Next arrows */
+.hp-carousel-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20%;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 3rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  z-index: 3;
+}
+
+.hp-arrow-prev {
+  left: 0;
+  justify-content: flex-start;
+  background: linear-gradient(to right, rgba(0,0,0,0.35), transparent);
+}
+
+.hp-arrow-next {
+  right: 0;
+  justify-content: flex-end;
+  background: linear-gradient(to left, rgba(0,0,0,0.35), transparent);
+}
+
+.hp-carousel-arrow:hover {
+  background: linear-gradient(to right, rgba(0,0,0,0.55), transparent);
+}
+
+.hp-arrow-next:hover {
+  background: linear-gradient(to left, rgba(0,0,0,0.55), transparent);
+}
+
+/* Dots */
+.hp-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 0 0;
+}
+
+.hp-carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--sl-color-gray-5);
+  cursor: pointer;
+  padding: 0;
+  margin: 0 !important;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.hp-carousel-dot.active {
+  background: var(--sl-color-accent);
+}
+
+/* Lightbox */
+.hp-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.hp-lightbox.open {
+  display: flex;
+}
+
+.hp-lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.hp-lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0 !important;
+  z-index: 1001;
+  transition: background 0.2s;
+}
+
+.hp-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────── */
+/* Tutorials                                                */
+/* ─────────────────────────────────────────────────────── */
+.hp-tutorials {
+  padding: 5rem 0 6rem;
+}
+
+.hp-tutorials h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 2rem;
+}
+
+.hp-tutorials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.hp-tut-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--sl-color-bg-nav);
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.hp-tut-card:hover {
+  border-color: var(--sl-color-accent);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: inherit;
+}
+
+.hp-tut-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--sl-color-accent);
+  font-family: var(--sl-font-mono);
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--sl-color-accent) 12%, transparent);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  margin-top: 0.15rem;
+  letter-spacing: 0.03em;
+}
+
+.hp-tut-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  color: var(--sl-color-text);
+}
+
+.hp-tut-card p {
+  font-size: 0.8rem;
+  color: var(--sl-color-gray-3);
+  margin: 0;
+  line-height: 1.5;
+}
+</style>

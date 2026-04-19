@@ -1,5 +1,24 @@
 /* Vanomation custom styles */
 
+/* ── Home page: remove Starlight's container padding so the hero goes full-width ── */
+/* :has(.hp) targets pages that contain our custom home page component */
+:has(.hp) .sl-container,
+:has(.hp) .content-panel,
+:has(.hp) .sl-markdown-content {
+  padding: 0 !important;
+  max-width: none !important;
+}
+
+:has(.hp) .sl-markdown-content {
+  margin: 0 !important;
+}
+
+/* Hide the "Home" page title on the home page */
+:has(.hp) #_top,
+:has(.hp) [data-page-title] {
+  display: none;
+}
+
 /* ── Amazon / "What you'll need" section ── */
 .amazon-list {
   background: var(--sl-color-bg-nav);

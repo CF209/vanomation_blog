@@ -41,4 +41,4 @@ All tutorials are Markdown files in `src/content/docs/tutorials/`. Create a new 
 3. Set build command: `npm run build`
 4. Set output directory: `dist`
 5. Add environment variable: `NODE_VERSION=22`
-6. Connect your custom domain (vanomation.com) in the Pages project settings
+6. Connect your custom domain (van-automation.com) in the Pages project settings

@@ -8,7 +8,10 @@
       "Read(//usr/local/bin/**)",
       "Bash(nvm use:*)",
       "Bash(cp:*)",
-      "Bash(kill %1)"
+      "Bash(kill %1)",
+      "WebSearch",
+      "WebFetch(domain:themefisher.com)",
+      "Bash(python3:*)"
     ]
   }
 }
