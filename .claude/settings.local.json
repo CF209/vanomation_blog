@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(nvm --version)",
+      "Read(//Users/chris/.nvm/versions/node/**)",
+      "Bash(brew list:*)",
+      "Read(//usr/local/bin/**)",
+      "Bash(nvm use:*)",
+      "Bash(cp:*)",
+      "Bash(kill %1)"
+    ]
+  }
+}

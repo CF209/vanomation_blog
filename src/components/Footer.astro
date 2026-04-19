@@ -1,0 +1,32 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+
+<Default {...Astro.props}><slot /></Default>
+
+<div class="giscus-wrapper">
+  <!--
+    SETUP REQUIRED: To enable comments, follow these steps:
+    1. Create (or use an existing) GitHub repository for this site
+    2. Enable Discussions in the repo settings (Features > Discussions)
+    3. Install the Giscus GitHub App: https://github.com/apps/giscus
+    4. Visit https://giscus.app/ and fill in your repo to get the values below
+    5. Replace the placeholder values in the script tag below
+  -->
+  <script is:inline
+    src="https://giscus.app/client.js"
+    data-repo="OWNER/REPO"
+    data-repo-id="REPO_ID"
+    data-category="General"
+    data-category-id="CATEGORY_ID"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>

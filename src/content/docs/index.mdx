@@ -1,0 +1,81 @@
+---
+title: Home
+description: Home automation for your campervan — tutorials for Raspberry Pi, Home Assistant, and more.
+template: splash
+hero:
+  tagline: A home automation project for your campervan
+  actions:
+    - text: Get Started
+      link: /tutorials/setting-up-raspberry-pi/
+      icon: right-arrow
+    - text: GitHub
+      link: https://github.com/CF209/vanomation
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## About
+
+My name's Chris and I converted a RAM Promaster into a campervan a few years ago. My time in the van is usually spent rock climbing, traveling, and adventuring outdoors, but I'm also always working on projects to improve the van.
+
+The most recent project I've been working on has been a home automation system for the van. I'm using a Raspberry Pi running **Home Assistant** as the central hub. This is an ongoing work in progress, but I'm already getting a lot of use out of the system. I created this site for my own documentation and for others who want to implement something similar.
+
+## What's been built
+
+<CardGrid>
+  <Card title="Wireless Light Switches" icon="star">
+    Wireless Zigbee buttons that can be installed anywhere in the van to control the lights
+  </Card>
+  <Card title="Solar Power Monitoring" icon="sun">
+    See how much power you're currently bringing in from your solar panels
+  </Card>
+  <Card title="Water Tank Level" icon="information">
+    Monitor how much water is in your fresh water tank
+  </Card>
+  <Card title="Propane Tank Level" icon="warning">
+    Monitor how much propane is in your propane tank
+  </Card>
+  <Card title="Van Tilt Sensor" icon="approve-check-circle">
+    See how flat your van is while parked and never sleep at a weird angle again
+  </Card>
+  <Card title="Auto-Locking Drawers" icon="puzzle">
+    Drawers that lock automatically when the van is started so they don't go flying open
+  </Card>
+</CardGrid>
+
+## Tutorials
+
+<CardGrid>
+  <Card title="1. Setting up the Raspberry Pi" icon="document">
+    [Get the Raspberry Pi powered and accessible remotely over SSH →](/tutorials/setting-up-raspberry-pi/)
+  </Card>
+  <Card title="2. Installing Home Assistant" icon="document">
+    [Install Home Assistant as a Docker container on the Pi →](/tutorials/installing-home-assistant/)
+  </Card>
+  <Card title="3. Controlling the Lights" icon="document">
+    [Use MOSFETs and GPIO to control 12V LED lights with dimming →](/tutorials/controlling-the-lights/)
+  </Card>
+  <Card title="4. Adding Wireless Switches" icon="document">
+    [Add Zigbee buttons around the van to control the lights →](/tutorials/adding-wireless-switches/)
+  </Card>
+  <Card title="5. Monitoring Solar Power" icon="document">
+    [Read data from a Renogy charge controller via serial →](/tutorials/monitoring-solar-power/)
+  </Card>
+  <Card title="6. Monitoring Water Level" icon="document">
+    [Install a water level sensor and read it with an ESP8266 →](/tutorials/monitoring-water-level/)
+  </Card>
+  <Card title="7. Monitoring Propane Level" icon="document">
+    [Reverse-engineer a Bluetooth propane sensor to get readings in Home Assistant →](/tutorials/monitoring-propane-level/)
+  </Card>
+  <Card title="8. Adding a Van Tilt Sensor" icon="document">
+    [Use an MPU6050 accelerometer to show van tilt in degrees →](/tutorials/adding-van-tilt-sensor/)
+  </Card>
+  <Card title="9. Auto-Locking Drawers" icon="document">
+    [Lock drawers with a solenoid latch triggered by the ignition →](/tutorials/autolocking-drawers/)
+  </Card>
+  <Card title="10. Future Projects" icon="document">
+    [Ideas for what's next →](/tutorials/future-projects/)
+  </Card>
+</CardGrid>
