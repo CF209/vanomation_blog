@@ -9,6 +9,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Vanomation',
+			favicon: '/favicon.png',
 			description: 'Home automation for your campervan — tutorials for Raspberry Pi, Home Assistant, and more.',
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/CF209' },
