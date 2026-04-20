@@ -1,16 +1,18 @@
 ---
-const tutorials = [
-  { num: '01', title: 'Setting up the Raspberry Pi',   desc: 'Flash Raspberry Pi OS, enable SSH, and mount the Pi in the van.',                                     href: '/setting_up_raspberry_pi/' },
-  { num: '02', title: 'Installing Home Assistant',      desc: 'Install Home Assistant as a Docker container and access it from any device.',                         href: '/installing_home_assistant/' },
-  { num: '03', title: 'Controlling the Lights',         desc: 'Use N-Channel MOSFETs and GPIO PWM pins to control and dim 12V LED lights.',                          href: '/control_the_lights/' },
-  { num: '04', title: 'Adding Wireless Switches',       desc: 'Add battery-powered Zigbee buttons anywhere in the van — no wiring required.',                        href: '/add_wireless_switches/' },
-  { num: '05', title: 'Monitoring Solar Power',         desc: 'Read data from a Renogy charge controller over serial and display it in Home Assistant.',             href: '/monitor_solar_power/' },
-  { num: '06', title: 'Monitoring Water Level',         desc: 'Install a resistive sensor in the freshwater tank and read it with a custom ESP8266 PCB.',            href: '/monitor_water_level/' },
-  { num: '07', title: 'Monitoring Propane Level',       desc: 'Reverse-engineer the Mopeka Bluetooth sensor to get propane readings in Home Assistant.',             href: '/monitor_propane_level/' },
-  { num: '08', title: 'Adding a Van Tilt Sensor',       desc: 'Use an MPU6050 accelerometer to show front/back and left/right tilt in degrees.',                    href: '/adding_van_tilt_sensor/' },
-  { num: '09', title: 'Auto-Locking Drawers',           desc: 'Lock drawers automatically with a solenoid latch triggered by the ignition signal.',                  href: '/autolocking_drawers/' },
-  { num: '10', title: 'Future Projects',                desc: 'Ideas for what\'s next — door locks, battery monitoring, remote access, and more.',                   href: '/future_projects/' },
-];
+import { getCollection } from 'astro:content';
+
+// Auto-generated from tutorial frontmatter — add new tutorials to astro.config.mjs and
+// create a matching .md file; this list updates automatically.
+const allDocs = await getCollection('docs');
+const tutorials = allDocs
+  .filter(e => e.id !== 'index' && e.data.sidebar?.order !== undefined)
+  .sort((a, b) => (a.data.sidebar?.order ?? 99) - (b.data.sidebar?.order ?? 99))
+  .map((e, i) => ({
+    num: String(i + 1).padStart(2, '0'),
+    title: e.data.title,
+    desc: e.data.description ?? '',
+    href: `/${e.id}/`,
+  }));
 
 const features = [
   { icon: '💡', title: 'Wireless Light Switches', desc: 'Zigbee buttons installable anywhere in the van — no wiring' },

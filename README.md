@@ -11,18 +11,58 @@ Home automation tutorials for your campervan. Built with [Astro](https://astro.b
 
 ## Development
 
-Requires Node.js 22+.
+Requires Node.js 24+.
 
 ```bash
+nvm use 24
 npm install
 npm run dev      # Start dev server at localhost:4321
 npm run build    # Build static site to ./dist
 npm run preview  # Preview the built site
 ```
 
-## Adding content
+## Adding a tutorial
 
-All tutorials are Markdown files in `src/content/docs/tutorials/`. Create a new `.md` file there and add it to the sidebar in `astro.config.mjs`.
+1. Create a new `.md` file in `src/content/docs/` (e.g. `my_new_tutorial.md`):
+
+```markdown
+---
+slug: my_new_tutorial
+title: My New Tutorial
+description: A short description shown on the home page and in search results.
+sidebar:
+  order: 11
+---
+
+Tutorial content goes here...
+```
+
+2. Add it to the sidebar in `astro.config.mjs`:
+
+```js
+{ label: 'My New Tutorial', slug: 'my_new_tutorial' },
+```
+
+The home page tutorial grid, header dropdown, and Giscus comment detection all update automatically — no other files need to be changed.
+
+## Adding a tutorial category
+
+In `astro.config.mjs`, add a new group to the sidebar array:
+
+```js
+sidebar: [
+  {
+    label: 'Tutorials',
+    items: [ /* existing tutorials */ ],
+  },
+  {
+    label: 'My New Category',
+    items: [
+      { label: 'My New Tutorial', slug: 'my_new_tutorial' },
+    ],
+  },
+],
+```
 
 ## Setting up Giscus comments
 
@@ -40,5 +80,5 @@ All tutorials are Markdown files in `src/content/docs/tutorials/`. Create a new 
 2. In the Cloudflare Pages dashboard, connect your GitHub repo
 3. Set build command: `npm run build`
 4. Set output directory: `dist`
-5. Add environment variable: `NODE_VERSION=22`
-6. Connect your custom domain (van-automation.com) in the Pages project settings
+5. Add environment variable: `NODE_VERSION=24`
+6. Connect your custom domain in the Pages project settings

@@ -9,32 +9,14 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 const shouldRenderSearch =
   config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 
-const tutorialSlugs = [
-  '/setting_up_raspberry_pi/',
-  '/installing_home_assistant/',
-  '/control_the_lights/',
-  '/add_wireless_switches/',
-  '/monitor_solar_power/',
-  '/monitor_water_level/',
-  '/monitor_propane_level/',
-  '/adding_van_tilt_sensor/',
-  '/autolocking_drawers/',
-  '/future_projects/',
-];
-const isTutorial = tutorialSlugs.includes(Astro.url.pathname);
-
-const tutorials = [
-  { label: 'Setting up the Raspberry Pi', href: '/setting_up_raspberry_pi/' },
-  { label: 'Installing Home Assistant',   href: '/installing_home_assistant/' },
-  { label: 'Controlling the Lights',      href: '/control_the_lights/' },
-  { label: 'Adding Wireless Switches',    href: '/add_wireless_switches/' },
-  { label: 'Monitoring Solar Power',      href: '/monitor_solar_power/' },
-  { label: 'Monitoring Water Level',      href: '/monitor_water_level/' },
-  { label: 'Monitoring Propane Level',    href: '/monitor_propane_level/' },
-  { label: 'Adding a Van Tilt Sensor',    href: '/adding_van_tilt_sensor/' },
-  { label: 'Auto-Locking Drawers',        href: '/autolocking_drawers/' },
-  { label: 'Future Projects',             href: '/future_projects/' },
-];
+// Derive tutorial list from sidebar config — auto-updates when astro.config.mjs changes
+const sidebarItems = config.sidebar.flatMap((group: any) => group.items ?? []);
+const tutorials = sidebarItems.map((item: any) => ({
+  label: item.label,
+  href: `/${item.id ?? item.slug}/`,
+}));
+const tutorialHrefs = tutorials.map((t: any) => t.href);
+const isTutorial = tutorialHrefs.includes(Astro.url.pathname);
 ---
 
 <div class="header">

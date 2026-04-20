@@ -1,17 +1,12 @@
 ---
 import Default from '@astrojs/starlight/components/Footer.astro';
-const tutorialSlugs = [
-  '/setting_up_raspberry_pi/',
-  '/installing_home_assistant/',
-  '/control_the_lights/',
-  '/add_wireless_switches/',
-  '/monitor_solar_power/',
-  '/monitor_water_level/',
-  '/monitor_propane_level/',
-  '/adding_van_tilt_sensor/',
-  '/autolocking_drawers/',
-  '/future_projects/',
-];
+import config from 'virtual:starlight/user-config';
+
+// Derive tutorial slugs from sidebar config — auto-updates when astro.config.mjs changes
+const tutorialSlugs = config.sidebar
+  .flatMap((group: any) => group.items ?? [])
+  .map((item: any) => `/${item.id ?? item.slug}/`);
+
 const showComments = tutorialSlugs.includes(Astro.url.pathname);
 ---
 
