@@ -71,3 +71,9 @@
 .sl-markdown-content {
   max-width: 52rem;
 }
+
+/* Hide heading anchor links */
+.sl-anchor-link {
+  display: none !important;
+}
+
