@@ -1,18 +1,25 @@
 ---
 import { getCollection } from 'astro:content';
+import config from 'virtual:starlight/user-config';
 
-// Auto-generated from tutorial frontmatter — add new tutorials to astro.config.mjs and
-// create a matching .md file; this list updates automatically.
+// Build a slug → entry map for descriptions
 const allDocs = await getCollection('docs');
-const tutorials = allDocs
-  .filter(e => e.id !== 'index' && e.data.sidebar?.order !== undefined)
-  .sort((a, b) => (a.data.sidebar?.order ?? 99) - (b.data.sidebar?.order ?? 99))
-  .map((e, i) => ({
-    num: String(i + 1).padStart(2, '0'),
-    title: e.data.title,
-    desc: e.data.description ?? '',
-    href: `/${e.id}/`,
-  }));
+const docsBySlug = Object.fromEntries(allDocs.map(e => [e.id, e]));
+
+// Group tutorials by sidebar category — auto-updates from astro.config.mjs
+const tutorialGroups = (config.sidebar as any[]).map(group => ({
+  label: group.label as string,
+  items: ((group.items ?? []) as any[]).map((item, i) => {
+    const slug = item.id ?? item.slug;
+    const entry = docsBySlug[slug];
+    return {
+      num: String(i + 1).padStart(2, '0'),
+      title: item.label as string,
+      desc: (entry?.data.description ?? '') as string,
+      href: `/${slug}/`,
+    };
+  }),
+}));
 
 const features = [
   { icon: '💡', title: 'Wireless Light Switches', desc: 'Zigbee buttons installable anywhere in the van — no wiring' },
@@ -237,18 +244,22 @@ const gallery = [
   <!-- ─── Tutorials ────────────────────────────────────── -->
   <section class="hp-tutorials">
     <div class="hp-container">
-      <h2>Tutorials</h2>
-      <div class="hp-tutorials-grid not-content">
-        {tutorials.map(t => (
-          <a href={t.href} class="hp-tut-card">
-            <span class="hp-tut-num">{t.num}</span>
-            <div>
-              <h3>{t.title}</h3>
-              <p>{t.desc}</p>
-            </div>
-          </a>
-        ))}
-      </div>
+      {tutorialGroups.map(group => (
+        <div class="hp-tutorials-group">
+          <h2>{group.label}</h2>
+          <div class="hp-tutorials-grid not-content">
+            {group.items.map(t => (
+              <a href={t.href} class="hp-tut-card">
+                <span class="hp-tut-num">{t.num}</span>
+                <div>
+                  <h3>{t.title}</h3>
+                  <p>{t.desc}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 
@@ -601,6 +612,14 @@ const gallery = [
 /* ─────────────────────────────────────────────────────── */
 .hp-tutorials {
   padding: 5rem 0 6rem;
+}
+
+.hp-tutorials-group {
+  margin-bottom: 3.5rem;
+}
+
+.hp-tutorials-group:last-child {
+  margin-bottom: 0;
 }
 
 .hp-tutorials h2 {

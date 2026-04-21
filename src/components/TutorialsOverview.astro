@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import config from 'virtual:starlight/user-config';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+const allDocs = await getCollection('docs');
+const docsBySlug = Object.fromEntries(allDocs.map(e => [e.id, e]));
+
+const groups = (config.sidebar as any[]).filter(group => Array.isArray(group.items)).map(group => ({
+  label: group.label as string,
+  items: ((group.items ?? []) as any[]).map((item: any) => {
+    const slug = item.id ?? item.slug;
+    const entry = docsBySlug[slug];
+    return {
+      title: item.label as string,
+      href: `/${slug}/`,
+      description: (entry?.data.description ?? '') as string,
+    };
+  }),
+}));
+---
+
+{groups.map(group => (
+  <div class="overview-group">
+    {groups.length > 1 && <h2>{group.label}</h2>}
+    <CardGrid>
+      {group.items.map(item => (
+        <LinkCard title={item.title} href={item.href} description={item.description} />
+      ))}
+    </CardGrid>
+  </div>
+))}
+
+<style>
+  .overview-group {
+    margin-bottom: 2.5rem;
+  }
+  .overview-group:last-child {
+    margin-bottom: 0;
+  }
+</style>

@@ -15,8 +15,15 @@ export default defineConfig({
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/CF209' },
 			],
 			sidebar: [
+				{ label: 'Overview', slug: 'tutorials' },
 				{
-					label: 'Tutorials',
+					label: 'New Tutorials',
+					items: [
+						{ label: 'Standalone Smart Lights', slug: 'standalone_smart_lights' },
+					],
+				},
+				{
+					label: 'Original Project',
 					items: [
 						{ label: 'Setting up the Raspberry Pi', slug: 'setting_up_raspberry_pi' },
 						{ label: 'Installing Home Assistant', slug: 'installing_home_assistant' },

@@ -36,11 +36,18 @@ const isTutorial = tutorialHrefs.includes(Astro.url.pathname);
           <path d="M6 8L1 3h10L6 8z"/>
         </svg>
       </button>
-      <ul class="tutorials-menu" role="menu" id="tutorials-menu">
-        {tutorials.map(t => (
-          <li role="none">
-            <a href={t.href} role="menuitem">{t.label}</a>
-          </li>
+      <ul class="tutorials-menu" id="tutorials-menu">
+        {config.sidebar.map((group: any) => (
+          <>
+            {config.sidebar.length > 1 && (
+              <li class="tutorials-group-label">{group.label}</li>
+            )}
+            {(group.items ?? []).map((item: any) => (
+              <li>
+                <a href={`/${item.id ?? item.slug}/`}>{item.label}</a>
+              </li>
+            ))}
+          </>
         ))}
       </ul>
     </div>
@@ -178,6 +185,22 @@ const isTutorial = tutorialHrefs.includes(Astro.url.pathname);
 
   .tutorials-menu.open {
     display: block;
+  }
+
+  .tutorials-group-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--sl-color-accent);
+    padding: 0.4rem 0.75rem 0.3rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--sl-color-hairline);
+  }
+
+  .tutorials-group-label:first-child {
+    margin-top: 0;
+    border-top: none;
   }
 
   .tutorials-menu a {
