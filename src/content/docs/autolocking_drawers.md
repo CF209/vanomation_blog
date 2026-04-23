@@ -17,7 +17,7 @@ One of the biggest issues with my van build has been the drawers flying open whi
 
 A solenoid converts electrical current into linear motion using a wire coil with a plunger in the middle. Current through the coil creates a magnetic field that pushes the plunger. When current stops, a spring pulls it back.
 
-![Solenoid door latch showing plunger mechanism](/img/drawer/drawer1.jpg)
+![Solenoid door latch showing plunger mechanism](../../assets/img/drawer/drawer1.jpg)
 
 This solenoid runs on 12V, draws 0.3A when powered, and is unlocked when unpowered — important because most solenoids I found were the opposite.
 
@@ -25,7 +25,7 @@ This solenoid runs on 12V, draws 0.3A when powered, and is unlocked when unpower
 
 The circuit is nearly identical to the [light control circuit](/control_the_lights/):
 
-![Solenoid switching circuit with MOSFET and flyback diode](/img/drawer/drawer2.png)
+![Solenoid switching circuit with MOSFET and flyback diode](../../assets/img/drawer/drawer2.png)
 
 A GPIO pin from the ESP32 switches an N-Channel MOSFET, which controls current through the solenoid connected at J5. Key components:
 
@@ -36,7 +36,7 @@ A GPIO pin from the ESP32 switches an N-Channel MOSFET, which controls current t
 
 I built the circuit on a breadboard with an ESP32 development board (I plan to design a PCB eventually) and rigged up the latch on my most problematic drawer:
 
-![Solenoid latch mounted on a drawer](/img/drawer/drawer3.jpeg)
+![Solenoid latch mounted on a drawer](../../assets/img/drawer/drawer3.jpeg)
 
 ## Step 2 — Configure ESPHome
 
@@ -51,7 +51,7 @@ switch:
 
 With the ESP32 programmed, I can now control the solenoid from Home Assistant:
 
-![Solenoid switch on Home Assistant dashboard](/img/drawer/drawer4.png)
+![Solenoid switch on Home Assistant dashboard](../../assets/img/drawer/drawer4.png)
 
 ## Step 3 — Detect the ignition
 
@@ -59,7 +59,7 @@ This solved the manual control problem, but I still wanted the drawer to lock au
 
 I had already tapped into an ignition wire in the van for the DC-DC charger. Using a multimeter I found it reads **0V when off** and **~14.3V when on** — a clean discrete signal. The 14.3V is too high for the Raspberry Pi GPIO pins, so I added a MOSFET voltage step-down circuit:
 
-![Ignition sense circuit — MOSFET voltage divider](/img/drawer/drawer5.png)
+![Ignition sense circuit — MOSFET voltage divider](../../assets/img/drawer/drawer5.png)
 
 This steps down the voltage so the GPIO pin never sees more than 3.3V. It also inverts the signal, so the pin reads `1` when the van is off and `0` when it's on.
 
@@ -81,7 +81,7 @@ binary_sensor:
 
 This sets up the sensor on GPIO 26 and re-inverts the signal. After restarting Home Assistant you'll have the ignition state as a sensor:
 
-![Van ignition binary sensor in Home Assistant](/img/drawer/drawer6.png)
+![Van ignition binary sensor in Home Assistant](../../assets/img/drawer/drawer6.png)
 
 ## Step 5 — Create automations
 
@@ -89,11 +89,11 @@ Create automations to lock and unlock automatically. Go to **Configuration → A
 
 **Lock automation trigger** (fires when ignition turns on):
 
-![Lock automation trigger — ignition on](/img/drawer/drawer7.png)
+![Lock automation trigger — ignition on](../../assets/img/drawer/drawer7.png)
 
 **Lock automation action** (turns solenoid on):
 
-![Lock automation action — enable solenoid](/img/drawer/drawer8.png)
+![Lock automation action — enable solenoid](../../assets/img/drawer/drawer8.png)
 
 Create a second automation with the reverse — trigger when ignition turns off, action to turn the solenoid off.
 

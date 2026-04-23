@@ -1,6 +1,8 @@
 ---
 import type { Props } from '@astrojs/starlight/props';
 import StarlightHead from '@astrojs/starlight/components/Head.astro';
+import { getImage } from 'astro:assets';
+import ogImageSrc from '../assets/img/hero-bg.jpg';
 
 const { entry, siteTitle } = Astro.props;
 
@@ -9,7 +11,8 @@ const pageTitle = entry?.data.title
   : siteTitle;
 const description = entry?.data.description ?? 'Home automation for your campervan — tutorials for Raspberry Pi, Home Assistant, and more.';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/img/hero-bg.jpg', Astro.site);
+const ogImg = await getImage({ src: ogImageSrc, format: 'webp', width: 1200 });
+const ogImage = new URL(ogImg.src, Astro.site);
 ---
 
 <StarlightHead {...Astro.props}><slot /></StarlightHead>

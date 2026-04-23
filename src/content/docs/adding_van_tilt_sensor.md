@@ -17,17 +17,17 @@ The next sensor I thought would be useful was a level sensor to see how flat the
 
 Any 2 or 3-axis accelerometer works for this, but the MPU6050 is widely available with lots of breakout boards:
 
-![MPU6050 accelerometer breakout board](/img/tilt/tilt1.jpeg)
+![MPU6050 accelerometer breakout board](../../assets/img/tilt/tilt1.jpeg)
 
 The MPU6050 communicates via I2C. I wanted to mount it under my bed platform, which was too far from the Pi, so I used an ESP8266 to communicate with the MPU6050 and send data over WiFi.
 
 If you built the [water level sensor PCB](/monitor_water_level/), there's a 6-pin I2C header on that board (J1) added specifically for the MPU6050. In its default state it works with the Adafruit MPU6050 module. Closing the JP1 solder jumper also accommodates cheaper MPU6050 modules from Amazon.
 
-![ESP8266 PCB with MPU6050 header highlighted](/img/tilt/tilt2.png)
+![ESP8266 PCB with MPU6050 header highlighted](../../assets/img/tilt/tilt2.png)
 
 KiCad files: [ESP8266 PCB KiCad Files](https://github.com/CF209/kicad/tree/main/ESP8266_Water_Sensor)
 
-![MPU6050 mounted on the PCB (J1 connector visible)](/img/tilt/tilt3.jpeg)
+![MPU6050 mounted on the PCB (J1 connector visible)](../../assets/img/tilt/tilt3.jpeg)
 
 ## Step 1 — Configure ESPHome
 
@@ -102,13 +102,13 @@ There was quite a bit of sensor noise, so I added a low-pass filter:
 
 The end result is a sensor showing the van's tilt, making it much easier to find a level parking spot:
 
-![Tilt sensor displayed in Home Assistant](/img/tilt/tilt4.png)
+![Tilt sensor displayed in Home Assistant](../../assets/img/tilt/tilt4.png)
 
 ## Update: Custom Lovelace card
 
 I wasn't happy with how the default sensors looked, so I made a custom Lovelace card that shows the tilt visually with a van graphic that tilts in real time:
 
-![Custom van tilt card showing tilt angles](/img/tilt/tilt5.png)
+![Custom van tilt card showing tilt angles](../../assets/img/tilt/tilt5.png)
 
 The code for the card: [Van Tilt Sensor Custom Card](https://github.com/CF209/van-tilt-sensor-custom-card)
 

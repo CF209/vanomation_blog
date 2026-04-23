@@ -26,7 +26,7 @@ My requirements were:
 
 > ⚠️ **Warning:** Disconnect all power before touching any wires
 
-![Shelly Wiring](/img/standalone/shelly_wiring.webp)
+![Shelly Wiring](../../assets/img/standalone/shelly_wiring.webp)
 
 Follow the above diagram to wire up the lights. Connect your power wire (12V or 24V) to the **+** pin and ground wire to the **⊥** pin to power the Shelly. You can ignore the switch wiring for now, we'll go into that more later.
 
@@ -38,7 +38,7 @@ Once the wiring is done and the power has been turned back on, it's time to set 
 
 If you have wifi in your Van or a hotspot, you can connect the Shelly by going to Settings -> Wifi and entering your wifi details. Once the Shelly connects, you can see the IPv4 address in the Wi-Fi status section:
 
-![Wi-Fi Status](/img/standalone/wifi_status.png)
+![Wi-Fi Status](../../assets/img/standalone/wifi_status.png)
 
 Copy this IP address, then you can disconnect from the Shelly network and reconnect to your wifi network. The same Shelly web interface should be accessible from that IP address you copied. If you want to ensure this IP address never changes, you can also set a static IP in the Shelly web interface.
 
@@ -46,7 +46,7 @@ Copy this IP address, then you can disconnect from the Shelly network and reconn
 
 The default configuration for the shelly is for RGBW mode, so we need to reconfigure it for Lights x4 mode. Go to Settings -> Device Profile, select "Lights x 4" and click "Save settings"
 
-![Device Profile](/img/standalone/device_profile.png)
+![Device Profile](../../assets/img/standalone/device_profile.png)
 
 Back on the home page, you should now see 4 lights corresponding to the 4 channels you wired up earlier with Light0 - R, Light1 - G, Light2 - B, and Light3 - W. Try using the controls in the web interface to control your lights and make sure they are fully working. If not, double-check your wiring.
 

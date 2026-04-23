@@ -20,7 +20,7 @@ The first step is to program the Zigbee dongle with the correct firmware. The pr
 
 [Flashing the CC2531](https://www.zigbee2mqtt.io/information/flashing_the_cc2531.html)
 
-![Zigbee CC2531 dongle connected to CC Debugger](/img/switches/switches9.jpg)
+![Zigbee CC2531 dongle connected to CC Debugger](../../assets/img/switches/switches9.jpg)
 
 ## Step 2 — Add the Zigbee integration
 
@@ -30,7 +30,7 @@ Insert the programmed dongle into the Raspberry Pi. In Home Assistant, go to **C
 
 From the Integrations page, click **Configure** on your Zigbee integration, then **Add Device**. Take out your Aqara switch and remove the battery tab. Press and hold the small button on top of the device — Home Assistant should discover it:
 
-![Home Assistant discovering the Aqara switch](/img/switches/switches1.png)
+![Home Assistant discovering the Aqara switch](../../assets/img/switches/switches1.png)
 
 Sometimes this takes a few tries. It helps to hold the button closer to the Raspberry Pi during pairing. After discovery, rename the device to something descriptive.
 
@@ -40,11 +40,11 @@ With the button configured, link it to the lights with an automation. Go to **Co
 
 Add a trigger for when the button is pressed:
 
-![Automation trigger — button press](/img/switches/switches2.png)
+![Automation trigger — button press](../../assets/img/switches/switches2.png)
 
 Then add an action to toggle the light:
 
-![Automation action — toggle light](/img/switches/switches3.png)
+![Automation action — toggle light](../../assets/img/switches/switches3.png)
 
 The `transition` property adds a nice effect of gradually increasing or decreasing brightness. I also created a second automation for controlling the bed lights from a double press.
 
@@ -52,7 +52,7 @@ The `transition` property adds a nice effect of gradually increasing or decreasi
 
 The button now controls the lights! I have one by the steering wheel, one by the sliding door, one by the bed, and one centered on a cabinet:
 
-![Aqara wireless switch mounted in the van](/img/switches/switches4.jpg)
+![Aqara wireless switch mounted in the van](../../assets/img/switches/switches4.jpg)
 
 ## Bonus: Temperature and humidity sensor
 
@@ -60,4 +60,4 @@ You can follow the same steps above to add other Zigbee devices. I added this te
 
 [Aqara Temperature and Humidity Sensor](https://www.amazon.com/gp/product/B07D37FKGY)
 
-![Aqara temperature and humidity sensor in the van](/img/switches/switches8.jpg)
+![Aqara temperature and humidity sensor in the van](../../assets/img/switches/switches8.jpg)

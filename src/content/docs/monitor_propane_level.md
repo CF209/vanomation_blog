@@ -19,7 +19,7 @@ The Mopeka sensor has its own app which works fine on its own — but I'd always
 
 I reached out to Mopeka asking for an API, but never received a response. The only path forward was to reverse-engineer the app.
 
-![Mopeka Tank Check app showing propane level](/img/propane/propane1.png)
+![Mopeka Tank Check app showing propane level](../../assets/img/propane/propane1.png)
 
 ## Step 1 — Read the Bluetooth data
 
@@ -131,6 +131,6 @@ sensor:
 
 The propane sensor can now be added to your Home Assistant dashboard:
 
-![Propane level gauge card on Home Assistant dashboard](/img/propane/propane4.png)
+![Propane level gauge card on Home Assistant dashboard](../../assets/img/propane/propane4.png)
 
-![Propane sensor details in Home Assistant](/img/propane/propane5.png)
+![Propane sensor details in Home Assistant](../../assets/img/propane/propane5.png)

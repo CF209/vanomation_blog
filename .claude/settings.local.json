@@ -14,7 +14,9 @@
       "Bash(python3:*)",
       "Bash(grep:*)",
       "Bash(npm run:*)",
-      "Bash(curl -s http://localhost:4321)"
+      "Bash(curl -s http://localhost:4321)",
+      "Bash(du -sh /Users/chris/Documents/Claude/vanomation_website/public/img/hero-bg.jpg /Users/chris/Documents/Claude/vanomation_website/public/img/van/*.jpg /Users/chris/Documents/Claude/vanomation_website/public/img/ha/*.png)",
+      "Bash(du -sh /Users/chris/Documents/Claude/vanomation_website/public/img/**/*)"
     ]
   }
 }

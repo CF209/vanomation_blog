@@ -46,11 +46,11 @@ http://<YOUR_PI_IP>:8123
 
 You should see the Home Assistant setup page:
 
-![Home Assistant initial setup page](/img/install/install2.png)
+![Home Assistant initial setup page](../../assets/img/install/install2.png)
 
 Follow the prompts to finish configuring it. Once done, you'll see the default dashboard:
 
-![Home Assistant default dashboard](/img/install/install3.png)
+![Home Assistant default dashboard](../../assets/img/install/install3.png)
 
 ## Accessing from your phone
 
@@ -58,6 +58,6 @@ You can reach Home Assistant from any phone or computer on your network using th
 
 I originally mounted an old smartphone in the van and ran the Home Assistant app on it, but the screen was a bit small. I recently found a good deal on a Kindle Fire tablet and switched to that. I use the **Fully Kiosk** app to display the Home Assistant webpage as the main screen on the tablet — now I have a dedicated panel to control everything.
 
-![Kindle Fire tablet mounted in the van showing Home Assistant](/img/install/install4.jpg)
+![Kindle Fire tablet mounted in the van showing Home Assistant](../../assets/img/install/install4.jpg)
 
 Home Assistant isn't very useful without integrating it with the van's systems, so next we'll use it to control the lights!

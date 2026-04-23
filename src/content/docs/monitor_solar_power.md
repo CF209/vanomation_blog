@@ -23,15 +23,15 @@ The three components: the USB serial dongle (for the correct protocol), the DB9-
 
 The Renogy charge controller's RJ12 pinout is: **TX / RX / GND / GND / +12V / +12V**. On the USB serial dongle: pin 2 is RXD, pin 3 is TXD, pin 5 is GND. Connect RJ12 TX → serial dongle RXD and RJ12 RX → serial dongle TXD, plus GND.
 
-![DB9 to RJ12 adapter wiring](/img/solar/solar1.jpeg)
+![DB9 to RJ12 adapter wiring](../../assets/img/solar/solar1.jpeg)
 
-![Completed cable assembly](/img/solar/solar2.jpeg)
+![Completed cable assembly](../../assets/img/solar/solar2.jpeg)
 
 :::caution
 Before connecting the cable to the serial dongle, use a multimeter to verify pin voltages: TX to GND and TX to RX should both read about 5V. Make sure you haven't accidentally connected the 12V pins — that could fry the serial dongle and possibly the Raspberry Pi.
 :::
 
-![Multimeter voltage check on cable](/img/solar/solar5.jpg)
+![Multimeter voltage check on cable](../../assets/img/solar/solar5.jpg)
 
 ## Step 1 — Identify the serial port
 
@@ -121,4 +121,4 @@ sensor:
 
 Restart Home Assistant and add the sensor to your dashboard:
 
-![Solar power sensor on Home Assistant dashboard](/img/solar/solar3.png)
+![Solar power sensor on Home Assistant dashboard](../../assets/img/solar/solar3.png)

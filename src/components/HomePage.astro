@@ -1,6 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
 import config from 'virtual:starlight/user-config';
+
+import heroBgSrc from '../assets/img/hero-bg.jpg';
+import van1 from '../assets/img/van/van1.jpg';
+import ha3 from '../assets/img/ha/ha3.png';
+import van2 from '../assets/img/van/van2.jpg';
+import ha1 from '../assets/img/ha/ha1.png';
+import van3 from '../assets/img/van/van3.jpg';
+import tilt5 from '../assets/img/tilt/tilt5.png';
+
+const heroBg = await getImage({ src: heroBgSrc, format: 'webp', width: 1920 });
 
 // Build a slug → entry map for descriptions
 const allDocs = await getCollection('docs');
@@ -31,12 +42,12 @@ const features = [
 ];
 
 const gallery = [
-  { src: '/img/van/van1.jpg',    alt: 'Van exterior' },
-  { src: '/img/ha/ha3.png',      alt: 'Home Assistant dashboard' },
-  { src: '/img/van/van2.jpg',    alt: 'Van interior' },
-  { src: '/img/ha/ha1.png',      alt: 'Home Assistant controls' },
-  { src: '/img/van/van3.jpg',    alt: 'Van on the road' },
-  { src: '/img/tilt/tilt5.png',  alt: 'Custom van tilt card' },
+  { src: van1,  alt: 'RAM Promaster campervan exterior' },
+  { src: ha3,   alt: 'Home Assistant van automation dashboard' },
+  { src: van2,  alt: 'Campervan interior with custom lighting controls' },
+  { src: ha1,   alt: 'Home Assistant light control panel' },
+  { src: van3,  alt: 'RAM Promaster campervan on the road' },
+  { src: tilt5, alt: 'Custom van tilt sensor card in Home Assistant' },
 ];
 ---
 
@@ -44,7 +55,7 @@ const gallery = [
 
   <!-- ─── Hero ─────────────────────────────────────────── -->
   <section class="hp-hero">
-    <div class="hp-hero-inner" style="background-image:url('/img/hero-bg.jpg')">
+    <div class="hp-hero-inner" style={`background-image:url('${heroBg.src}')`}>
       <div class="hp-hero-overlay"></div>
       <div class="hp-hero-content">
         <h1 class="hp-hero-title">Vanomation</h1>
@@ -104,12 +115,11 @@ const gallery = [
         <div class="hp-carousel-track" id="hp-carousel-track">
           {gallery.map((img, i) => (
             <div class="hp-carousel-slide">
-              <img
+              <Image
                 src={img.src}
                 alt={img.alt}
+                width={1000}
                 loading={i < 3 ? 'eager' : 'lazy'}
-                data-src={img.src}
-                data-alt={img.alt}
               />
             </div>
           ))}
@@ -219,8 +229,8 @@ const gallery = [
     slides.forEach(slide => {
       slide.querySelector('img')!.addEventListener('click', (e) => {
         const img = e.currentTarget as HTMLImageElement;
-        lightboxImg.src = img.dataset.src!;
-        lightboxImg.alt = img.dataset.alt!;
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
         lightbox.classList.add('open');
         lightbox.setAttribute('aria-hidden', 'false');
       });

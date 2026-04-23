@@ -28,13 +28,13 @@ Choose a mounting location near the center of the tank top (the more centered, t
 
 Install the sensor using the flange — the flange goes inside the tank, the gasket and sensor go on top, with screws clamping everything together. The flange is C-shaped so it fits through the 40mm hole. I used longer 3" screws temporarily to hold the flange in place while aligning the sensor and starting the shorter screws. Once two screws are in place it stays aligned for the rest.
 
-![Water level sensor installed on the tank top](/img/water/water1.jpeg)
+![Water level sensor installed on the tank top](../../assets/img/water/water1.jpeg)
 
 ## Step 2 — The voltage divider circuit
 
 The KUS water level sensor acts as a variable resistor: **33Ω at full** and **240Ω at empty**. To read this we use a voltage divider to convert the resistance to a voltage readable by an ADC:
 
-![Voltage divider schematic for the water sensor](/img/water/water2.png)
+![Voltage divider schematic for the water sensor](../../assets/img/water/water2.png)
 
 Connector J4 connects to the water level sensor. The capacitor helps reduce noise. With a 1kΩ resistor and an ADC max of 1V, the expected voltage range is about 0.105V (full) to 0.639V (empty).
 
@@ -51,15 +51,15 @@ I designed a custom PCB for the ESP8266:
 
 KiCad files: [Water Sensor KiCad Files](https://github.com/CF209/kicad/tree/main/ESP8266_Water_Sensor)
 
-![ESP8266 water sensor PCB schematic](/img/water/water3.png)
+![ESP8266 water sensor PCB schematic](../../assets/img/water/water3.png)
 
-![Assembled ESP8266 water sensor PCB](/img/water/water4.jpg)
+![Assembled ESP8266 water sensor PCB](../../assets/img/water/water4.jpg)
 
 For the initial programming, I use this USB serial adapter — I designed the board so the adapter fits directly into J5 header pins. Hold S1 while inserting:
 
 [FT232 USB to TTL Serial Adapter](https://amzn.to/4cRIrxM)
 
-![Programming the board via serial adapter](/img/water/water9.jpg)
+![Programming the board via serial adapter](../../assets/img/water/water9.jpg)
 
 ## Step 4 — Configure with ESPHome
 
@@ -90,17 +90,17 @@ Click **Upload** to program the board.
 
 With the board programmed, install it near the water sensor:
 
-![ESP8266 board installed near water tank](/img/water/water5.jpeg)
+![ESP8266 board installed near water tank](../../assets/img/water/water5.jpeg)
 
 In Home Assistant go to **Configuration → Integrations** and add the **ESPHome** integration. It will automatically detect any ESPHome devices on your network. Add your water sensor and you'll have access to the voltage readings:
 
-![ESPHome water voltage sensor in Home Assistant](/img/water/water6.png)
+![ESPHome water voltage sensor in Home Assistant](../../assets/img/water/water6.png)
 
 ## Step 6 — Calibrate and convert to percentage
 
 I logged the voltage as the tank emptied and then fully refilled to map voltages to fill levels:
 
-![Water level voltage vs fill percentage chart](/img/water/water7.png)
+![Water level voltage vs fill percentage chart](../../assets/img/water/water7.png)
 
 I then added a template sensor to ESPHome that converts voltage to percentage:
 
@@ -148,4 +148,4 @@ I then added a template sensor to ESPHome that converts voltage to percentage:
 
 I now have a fully functional water level sensor in Home Assistant:
 
-![Water level percentage displayed in Home Assistant](/img/water/water8.png)
+![Water level percentage displayed in Home Assistant](../../assets/img/water/water8.png)

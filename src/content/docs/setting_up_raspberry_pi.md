@@ -25,7 +25,7 @@ The first step is to install Raspberry Pi OS on the SD card. Use the Raspberry P
 
 Install the imager on your laptop, insert the SD card, choose an operating system, select your SD card, and click **Write**. I'm using **Raspberry Pi OS Lite (32-bit)** because I want a headless setup — no monitor, keyboard, or mouse — accessed entirely via SSH.
 
-![Raspberry Pi Imager showing OS selection](/img/raspi/raspi1.png)
+![Raspberry Pi Imager showing OS selection](../../assets/img/raspi/raspi1.png)
 
 ## Step 2 — Enable SSH and configure WiFi
 
@@ -68,7 +68,7 @@ The SD card is now ready. Eject it safely, install it in the Pi, and connect pow
 
 To find the Pi's IP address, log into your router and look at the DHCP client list — you should see a device named `raspberrypi`. Use the router's address reservation feature to permanently assign it the same IP.
 
-![Router DHCP client list showing raspberrypi](/img/raspi/raspi2.png)
+![Router DHCP client list showing raspberrypi](../../assets/img/raspi/raspi2.png)
 
 ## Step 4 — SSH in and update
 
@@ -95,4 +95,4 @@ sudo apt-get upgrade
 
 Since the Pi can now be fully accessed remotely, you can install it somewhere out of sight. Don't make it too inaccessible though — you'll eventually be connecting to the GPIO pins and USB ports for future projects. I screwed mine into the wall of my electronics cabinet near the van's power system since it's a central location.
 
-![Raspberry Pi mounted in van electronics cabinet](/img/raspi/raspi3.jpg)
+![Raspberry Pi mounted in van electronics cabinet](../../assets/img/raspi/raspi3.jpg)

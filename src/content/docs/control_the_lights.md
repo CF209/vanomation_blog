@@ -20,7 +20,7 @@ With Home Assistant installed we can now add a first interface: control of the l
 
 The Raspberry Pi GPIO pins operate at 3.3V and can't drive 12V lights directly. Instead, we use the GPIO pins to switch an N-Channel MOSFET, which in turn switches the 12V supply to the lights:
 
-![MOSFET switching circuit diagram](/img/lights/lights1.png)
+![MOSFET switching circuit diagram](../../assets/img/lights/lights1.png)
 
 The GPIO pin drives the **gate** of the MOSFET (pin 2). When the gate voltage exceeds the threshold voltage, the MOSFET turns on and allows current to flow from the **drain** (pin 1) to the **source** (pin 3).
 
@@ -32,7 +32,7 @@ A 10kΩ resistor is added between gate and ground to keep the MOSFET off when th
 
 I assembled this by soldering wires directly to the MOSFETs and connecting the gate to a breadboard with the resistor and GPIO extension board:
 
-![MOSFET circuit assembled on breadboard](/img/lights/lights2.jpeg)
+![MOSFET circuit assembled on breadboard](../../assets/img/lights/lights2.jpeg)
 
 For GPIO pins, use **GPIO 12, 13, 18, or 19** — these are the hardware PWM pins that allow dimming. I used 12 and 13, with the circuit replicated twice for two light zones.
 
@@ -77,7 +77,7 @@ This config sets up two light zones on GPIO 12 and 13. Adjust names and pin numb
 
 After restarting Home Assistant, you can add a light card to your dashboard:
 
-![Home Assistant dashboard with light control card](/img/lights/lights3.png)
+![Home Assistant dashboard with light control card](../../assets/img/lights/lights3.png)
 
 ## Update: Custom ESP32 PCB
 
@@ -85,7 +85,7 @@ I later designed a custom PCB using an ESP32 microcontroller to control the ligh
 
 [ESP32 PCB KiCad Files](https://github.com/CF209/kicad/tree/main/ESP32_12v_Relay)
 
-![Custom ESP32 PCB for light control](/img/lights/lights5.jpg)
+![Custom ESP32 PCB for light control](../../assets/img/lights/lights5.jpg)
 
 I originally planned to use ESPHome, but the PCB uses the ESP32-C3 which wasn't supported by ESPHome yet. I ended up writing the firmware in C:
 
@@ -93,4 +93,4 @@ I originally planned to use ESPHome, but the PCB uses the ESP32-C3 which wasn't 
 
 On first startup, the ESP32 starts in soft-AP mode and hosts a web server for configuration — WiFi network, light names, and MQTT server. With the MQTT integration in Home Assistant, the lights show up as devices automatically:
 
-![ESP32 web configuration interface](/img/lights/lights6.png)
+![ESP32 web configuration interface](../../assets/img/lights/lights6.png)
