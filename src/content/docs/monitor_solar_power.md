@@ -2,6 +2,8 @@
 slug: monitor_solar_power
 title: Monitoring Solar Power
 description: Read data from a Renogy charge controller over serial and publish it to Home Assistant via MQTT.
+published: "2022"
+lastEdited: "2022"
 sidebar:
   order: 5
 ---

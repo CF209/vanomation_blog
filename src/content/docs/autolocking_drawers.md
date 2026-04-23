@@ -2,6 +2,8 @@
 slug: autolocking_drawers
 title: Auto-Locking Drawers
 description: Use a solenoid door latch and the van's ignition signal to automatically lock drawers when driving.
+published: "2022"
+lastEdited: "2022"
 sidebar:
   order: 9
 ---

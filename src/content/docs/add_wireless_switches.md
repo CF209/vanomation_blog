@@ -2,6 +2,8 @@
 slug: add_wireless_switches
 title: Adding Wireless Switches
 description: Add Zigbee wireless buttons around the van to control the lights without running any new wiring.
+published: "2022"
+lastEdited: "2022"
 sidebar:
   order: 4
 ---

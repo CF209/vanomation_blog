@@ -2,6 +2,8 @@
 slug: control_the_lights
 title: Controlling the Lights
 description: Use N-Channel MOSFETs and Raspberry Pi GPIO pins to control and dim 12V LED lights through Home Assistant.
+published: "2022"
+lastEdited: "2022"
 sidebar:
   order: 3
 ---

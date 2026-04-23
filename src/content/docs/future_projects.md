@@ -2,6 +2,8 @@
 slug: future_projects
 title: Future Projects
 description: Ideas for future van automation projects including door locks, battery monitoring, remote access, and voice control.
+published: "2022"
+lastEdited: "2022"
 sidebar:
   order: 10
 ---

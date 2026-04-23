@@ -2,6 +2,8 @@
 slug: monitor_propane_level
 title: Monitoring Propane Level
 description: Reverse-engineer the Mopeka Tank Check Bluetooth sensor to integrate propane level readings into Home Assistant.
+published: "2022"
+lastEdited: "2022"
 sidebar:
   order: 7
 ---

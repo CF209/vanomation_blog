@@ -20,13 +20,13 @@ if (!published || !lastEdited) {
   try {
     if (!lastEdited) {
       lastEdited = execSync(
-        `git log -1 --format="%as" -- "${filePath}"`,
+        `git log -1 --format="%ad" --date=short -- "${filePath}"`,
         { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'ignore'] }
       ).trim();
     }
     if (!published) {
       published = execSync(
-        `git log --follow --diff-filter=A --format="%as" -- "${filePath}"`,
+        `git log --follow --diff-filter=A --format="%ad" --date=short -- "${filePath}"`,
         { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'ignore'] }
       ).trim();
     }
@@ -35,17 +35,22 @@ if (!published || !lastEdited) {
   }
 }
 
-const fmt = (d: string) =>
-  new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const fmt = (d: string) => {
+  if (/^\d{4}$/.test(d)) return d;
+  const [year, month, day] = d.split('-').map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+};
+
+const showLastEdited = lastEdited && lastEdited !== published;
 ---
 
 <h1 id="_top">{entry.data.title}</h1>
 
-{(published || lastEdited) && (
+{(published || showLastEdited) && (
   <div class="page-dates">
     {published && <span>Published: {fmt(published)}</span>}
-    {published && lastEdited && <span class="separator">·</span>}
-    {lastEdited && <span>Last edited: {fmt(lastEdited)}</span>}
+    {published && showLastEdited && <span class="separator">·</span>}
+    {showLastEdited && <span>Last edited: {fmt(lastEdited)}</span>}
   </div>
 )}
 

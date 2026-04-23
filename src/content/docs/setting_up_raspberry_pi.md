@@ -2,6 +2,8 @@
 slug: setting_up_raspberry_pi
 title: Setting up the Raspberry Pi
 description: Get the Raspberry Pi powered, flashed with Raspberry Pi OS, and accessible remotely over SSH.
+published: "2022"
+lastEdited: "2022"
 sidebar:
   order: 1
 ---

@@ -2,6 +2,8 @@
 slug: adding_van_tilt_sensor
 title: Adding a Van Tilt Sensor
 description: Use an MPU6050 accelerometer with ESPHome to show the van's tilt angle in degrees on a custom Home Assistant card.
+published: "2022"
+lastEdited: "2022"
 sidebar:
   order: 8
 ---

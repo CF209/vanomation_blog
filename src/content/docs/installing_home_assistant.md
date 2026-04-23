@@ -2,6 +2,8 @@
 slug: installing_home_assistant
 title: Installing Home Assistant
 description: Install Home Assistant as a Docker container on the Raspberry Pi and access it from any device on your network.
+published: "2022"
+lastEdited: "2022"
 sidebar:
   order: 2
 ---

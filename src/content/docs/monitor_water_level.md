@@ -2,6 +2,8 @@
 slug: monitor_water_level
 title: Monitoring Water Level
 description: Install a resistive water level sensor in your freshwater tank and read it with a custom ESP8266 PCB through ESPHome.
+published: "2022"
+lastEdited: "2022"
 sidebar:
   order: 6
 ---
