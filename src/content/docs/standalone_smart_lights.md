@@ -1,7 +1,7 @@
 ---
 slug: standalone_smart_lights
 title: Standalone Smart Lights
-description: Smart lights with remote switches that don't require a hub
+description: Install Shelly Plus RGBW and Shelly BLU Buttons for hub-free smart van lighting with Bluetooth remote switches and optional Home Assistant integration.
 sidebar:
   order: 1
 ---

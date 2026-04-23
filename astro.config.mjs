@@ -1,12 +1,14 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://van-automation.com',
 	output: 'static',
 	integrations: [
+		sitemap(),
 		starlight({
 			title: 'Vanomation',
 			favicon: '/favicon.png',
@@ -42,6 +44,8 @@ export default defineConfig({
 			components: {
 				Footer: './src/components/Footer.astro',
 				Header: './src/components/Header.astro',
+				PageTitle: './src/components/PageTitle.astro',
+				Head: './src/components/Head.astro',
 			},
 		}),
 	],
