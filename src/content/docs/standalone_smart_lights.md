@@ -119,6 +119,49 @@ From the app click "Add device". If you're connected to the same wifi network as
 
 After adding the device, it seems to automatically disable bluetooth for some reason. Be sure to re-enable this in the settings from the web interface or the app otherwise the BLU buttons will stop working.
 
-## Control the lights with a dimmer switch
+## Control the lights with a PWM dimmer switch
 
-Coming soon!
+The next step was to enable control from a hard wired switch so the light control wouldn't be fully reliant on wireless buttons. I already had this dimmer switch installed in my van, so I decided to see if I could make it work with the Shelly: [12-24V LED Dual Slide Switch and Dimmer](https://amzn.to/41Teebp)
+
+The Shelly Plus RGBW PM has 4 input channels which can be set up connected to a switch, button, or be put in analog input mode. Simply connecting a switch or button is the easiest solution if you don't care about dimming, but I didn't want to lose the dimming function, so I set out to see if I could make use of the analog input mode.
+
+The analog input mode is designed to be connected to a 10k potentiometer. It then has an internal pull-up resistor and uses a voltage divider connected to an ADC (Analog to Digital Converter) input on the microcontroller. The voltage read by the ADC can be used to determine the resistance of the potentiometer. The circuit looks something like this:
+![Analog input with potentiometer](../../assets/img/standalone/analog_pot.svg)
+
+If you have a 10k potentiometer already, then I would just wire it up like shown here, but I still wanted to use my PWM dimmer switch.
+![Potentiometer Wiring](../../assets/img/standalone/pot_wiring.webp)
+
+The first step was to figure out how my dimmer switch works. I know it uses PWM, but it was unclear if the PWM was on the high 12V side, or on the low side. After some playing around with the switch and using my multimeter, I determined the circuit looks something like this:
+
+![Dimmer Switch Internal Circuit](../../assets/img/standalone/dimmer_circuit.png)
+
+The light power wire is always connected to 12V unless the switch is in the fully off position. The light ground wire is connected to ground through a mosfet which switches on and off with the PWM signal to control the brightness.
+
+With the above info, I thought that maybe I could connect the ground output from the dimmer switch directly to the Shelly's analog input. The PWM switching from the dimmer switch would ideally create an average voltage relative to the PWM duty cycle at the analog input which could be converted to brightness. Here is what the circuit would then look like:
+![Shelly wired with PWM dimmer switch](../../assets/img/standalone/pwm_wiring.png)
+
+Ideally I would also add a series resistor and a capacitor to the circuit to create a low pass filter for better averaging and to reduce any noise, but I didn't have any on hand in my van, so I just went with the direct connection and hoped for the best.
+
+On the Shelly side, I needed to then configure the analog inputs. From the web interface home screen, select the input number that you wired the dimmer switch to. Make sure the input is enabled, then in the Input/Output settings select "Analog" for the input mode. If you leave the output type as "Toggle", whenever the analog input changes, it will automatically change the state of the light.
+
+![Shelly input settings](../../assets/img/standalone/input_settings.png)
+
+The initial results from this were mixed. The input values were relatively stable when they got close to 0% or 100%, but in the middle range there was a terrible amount of noise that would cause the brightness to jump all over the place. I could leave the dimmer switch in the same position, and the input value readings would jump as much as 25%. The Shelly input has the ability to set a Delta threshold to account for some noise, but with the large jumps, this wouldn't work for smooth dimming.
+
+As a partial solution for now, I changed the input mode to "Detached" so that the Shelly wouldn't automatically change the light brightness from the input, then wrote a script to take the input and control the light. [The script can be found here](https://github.com/CF209/Shelly-Scripts/blob/main/pwm_input_handling.js) (note this script was written by AI) and does the following:
+- At the extremes where the input appears to be stable (below 5% or above 95%), automatically set the light to 0% or 100% brightness respectfully
+- In between these values, it has the concept of a stability window where if the input stays in the same window for a certain number of readings, it considers it to be stable and locks the brightness at that level until the input reading leaves the stability window again. This prevents the light from continuously changing brightness from noise
+- I also added a lookup table with preset brightness values for more gradual dimming since changes closer to 100% are much less noticeable than changes closer to 0%. This can be seen here:
+```javascript
+function mapBrightness(input) {
+  if (input < 5.0)  return 0;
+  if (input < 20.0) return 1;
+  if (input < 40.0) return 10;
+  if (input < 60.0) return 20;
+  if (input < 80.0) return 35;
+  if (input < 95.0) return 60;
+  return 100;
+}
+```
+
+In the end I'm still not very happy with this result as the dimming is still not very smooth and jumps around a bit while trying to dim, but it is workable. I'll most likely pick this back up again once I get back home and can easily add a low pass filter to the input. If that doesn't work, then I'll most likely move to a potentiometer design.
