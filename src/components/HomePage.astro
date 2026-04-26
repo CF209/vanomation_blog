@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import config from 'virtual:starlight/user-config';
+import type { ImageMetadata } from 'astro';
 
 import heroBgSrc from '../assets/img/hero-bg.jpg';
 import van1 from '../assets/img/van/van1.jpg';
@@ -11,6 +12,18 @@ import ha1 from '../assets/img/ha/ha1.png';
 import van3 from '../assets/img/van/van3.jpg';
 import tilt5 from '../assets/img/tilt/tilt5.png';
 
+// Auto-discovers thumbnails from src/assets/img/thumbnails/{slug}.{ext}
+// To add a thumbnail for a new tutorial, just drop a file there named after its slug.
+const thumbnailGlob = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/img/thumbnails/*',
+  { eager: true }
+);
+const thumbnails: Record<string, ImageMetadata> = {};
+for (const [path, mod] of Object.entries(thumbnailGlob)) {
+  const slug = path.split('/').pop()!.replace(/\.[^.]+$/, '');
+  thumbnails[slug] = mod.default;
+}
+
 const heroBg = await getImage({ src: heroBgSrc, format: 'webp', width: 1920 });
 
 // Build a slug → entry map for descriptions
@@ -18,19 +31,22 @@ const allDocs = await getCollection('docs');
 const docsBySlug = Object.fromEntries(allDocs.map(e => [e.id, e]));
 
 // Group tutorials by sidebar category — auto-updates from astro.config.mjs
-const tutorialGroups = (config.sidebar as any[]).map(group => ({
-  label: group.label as string,
-  items: ((group.items ?? []) as any[]).map((item, i) => {
-    const slug = item.id ?? item.slug;
-    const entry = docsBySlug[slug];
-    return {
-      num: String(i + 1).padStart(2, '0'),
-      title: item.label as string,
-      desc: (entry?.data.description ?? '') as string,
-      href: `/${slug}/`,
-    };
-  }),
-}));
+const tutorialGroups = (config.sidebar as any[])
+  .filter((group: any) => Array.isArray(group.items) && group.items.length > 0)
+  .map(group => ({
+    label: group.label as string,
+    items: ((group.items ?? []) as any[]).map((item: any) => {
+      const slug = item.id ?? item.slug;
+      const entry = docsBySlug[slug];
+      return {
+        slug,
+        title: item.label as string,
+        desc: (entry?.data.description ?? '') as string,
+        href: `/${slug}/`,
+        thumbnail: thumbnails[slug] ?? null,
+      };
+    }),
+  }));
 
 const features = [
   { icon: '💡', title: 'Wireless Light Switches', desc: 'Buttons installable anywhere in the van — no wiring' },
@@ -84,7 +100,7 @@ const gallery = [
           <p>
             While some of the original project is out of date now, and the original system has been decommissioned from my van, I'm continuing to work on new updates that I'll be posting here.
           </p>
-          <a href="/setting_up_raspberry_pi/" class="hp-btn-primary" style="display:inline-block;margin-top:1rem;">
+          <a href="/tutorials/" class="hp-btn-primary" style="display:inline-block;margin-top:1rem;">
             See the tutorials →
           </a>
         </div>
@@ -260,10 +276,14 @@ const gallery = [
           <div class="hp-tutorials-grid not-content">
             {group.items.map(t => (
               <a href={t.href} class="hp-tut-card">
-                <span class="hp-tut-num">{t.num}</span>
-                <div>
+                {t.thumbnail && (
+                  <div class="hp-tut-card-img">
+                    <Image src={t.thumbnail} alt={t.title} width={400} />
+                  </div>
+                )}
+                <div class="hp-tut-card-body">
                   <h3>{t.title}</h3>
-                  <p>{t.desc}</p>
+                  {t.desc && <p>{t.desc}</p>}
                 </div>
               </a>
             ))}
@@ -640,18 +660,17 @@ const gallery = [
 
 .hp-tutorials-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1rem;
 }
 
 .hp-tut-card {
   display: flex;
-  gap: 1rem;
-  align-items: flex-start;
+  flex-direction: column;
   background: var(--sl-color-bg-nav);
   border: 1px solid var(--sl-color-hairline);
   border-radius: 0.5rem;
-  padding: 1.25rem;
+  overflow: hidden;
   text-decoration: none;
   color: inherit;
   transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
@@ -665,24 +684,39 @@ const gallery = [
   color: inherit;
 }
 
-.hp-tut-num {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--sl-color-accent);
-  font-family: var(--sl-font-mono);
+.hp-tut-card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--sl-color-bg);
   flex-shrink: 0;
-  background: color-mix(in srgb, var(--sl-color-accent) 12%, transparent);
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.3rem;
-  margin-top: 0.15rem;
-  letter-spacing: 0.03em;
+}
+
+.hp-tut-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hp-tut-card-body {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .hp-tut-card h3 {
   font-size: 0.95rem;
   font-weight: 600;
-  margin: 0 0 0.35rem;
-  color: var(--sl-color-text);
+  margin: 0;
+  color: var(--sl-color-text-accent);
+  line-height: 1.3;
+}
+
+.hp-tut-card:hover h3 {
+  color: var(--sl-color-accent);
 }
 
 .hp-tut-card p {

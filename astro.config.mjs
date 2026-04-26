@@ -19,7 +19,7 @@ export default defineConfig({
 			sidebar: [
 				{ label: 'Overview', slug: 'tutorials' },
 				{
-					label: 'New Tutorials',
+					label: 'Tutorials',
 					items: [
 						{ label: 'Choosing a Home Assistant Device', slug: 'choosing_ha_hardware' },
 						{ label: 'Standalone Smart Lights', slug: 'standalone_smart_lights' },
@@ -37,7 +37,6 @@ export default defineConfig({
 						{ label: 'Monitoring Propane Level', slug: 'monitor_propane_level' },
 						{ label: 'Adding a Van Tilt Sensor', slug: 'adding_van_tilt_sensor' },
 						{ label: 'Auto-Locking Drawers', slug: 'autolocking_drawers' },
-						{ label: 'Future Projects', slug: 'future_projects' },
 					],
 				},
 			],

@@ -9,14 +9,7 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 const shouldRenderSearch =
   config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 
-// Derive tutorial list from sidebar config — auto-updates when astro.config.mjs changes
-const sidebarItems = config.sidebar.flatMap((group: any) => group.items ?? []);
-const tutorials = sidebarItems.map((item: any) => ({
-  label: item.label,
-  href: `/${item.id ?? item.slug}/`,
-}));
-const tutorialHrefs = tutorials.map((t: any) => t.href);
-const isTutorial = tutorialHrefs.includes(Astro.url.pathname);
+const isHomePage = Astro.url.pathname === '/';
 ---
 
 <div class="header">
@@ -28,7 +21,7 @@ const isTutorial = tutorialHrefs.includes(Astro.url.pathname);
     {shouldRenderSearch && <Search {...Astro.props} />}
   </div>
 
-  {!isTutorial && (
+  {isHomePage && (
     <div class="tutorials-dropdown print:hidden">
       <button class="tutorials-btn" aria-haspopup="true" aria-expanded="false" id="tutorials-btn">
         Tutorials
@@ -40,7 +33,11 @@ const isTutorial = tutorialHrefs.includes(Astro.url.pathname);
         {config.sidebar.map((group: any) => (
           <>
             {config.sidebar.length > 1 && (
-              <li class="tutorials-group-label">{group.label}</li>
+              <li class="tutorials-group-label">
+                {(group.id ?? group.slug)
+                  ? <a href={`/${group.id ?? group.slug}/`}>{group.label}</a>
+                  : group.label}
+              </li>
             )}
             {(group.items ?? []).map((item: any) => (
               <li>
@@ -201,6 +198,15 @@ const isTutorial = tutorialHrefs.includes(Astro.url.pathname);
   .tutorials-group-label:first-child {
     margin-top: 0;
     border-top: none;
+  }
+
+  .tutorials-group-label a {
+    color: var(--sl-color-accent);
+    text-decoration: none;
+  }
+
+  .tutorials-group-label a:hover {
+    text-decoration: underline;
   }
 
   .tutorials-menu a {
