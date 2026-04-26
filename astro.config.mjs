@@ -21,6 +21,7 @@ export default defineConfig({
 				{
 					label: 'New Tutorials',
 					items: [
+						{ label: 'Choosing a Home Assistant Device', slug: 'choosing_ha_hardware' },
 						{ label: 'Standalone Smart Lights', slug: 'standalone_smart_lights' },
 					],
 				},

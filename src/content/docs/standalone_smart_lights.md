@@ -6,7 +6,12 @@ sidebar:
   order: 1
 ---
 
+![Main Image](../../assets/img/standalone/main.png)
+
 One of the largest issues I had with the old system was that the light control relied on too many other systems. There were many other components that could fail and cause the lights to not work which can be very frustrating! These included the Raspberry Pi running Home Assistant, the Zigbee dongle and Zigbee2MQTT service, the light controller, or even just the wifi network. Having remote control of the lights was also one of my favorite features of the smart system, so I wanted to set out to solve these problems.
+
+[Original Smart Lights](https://van-automation.com/control_the_lights/)   
+[Original Wireless Switches](https://van-automation.com/add_wireless_switches/)
 
 My requirements were:
 1) Be able to control the lights with remote switches
@@ -18,9 +23,9 @@ My requirements were:
 ## What you'll need
 
 - **[Shelly Plus RGBW PM](https://amzn.to/4vGqBVW)** — This little device is great for controlling 12V or 24V lights. It has 4 channels for controlling single color lights, or a single channel for controlling RGBW lights. It also has 4 inputs that can be used for local hard wired control.
-- **[Shelly BLU Button](https://amzn.to/48Zejhw)** — Battery powered bluetooth button that can communicate directly with the Shelly Plus RGBW PM. Also comes in a "tough" version.
+- **[Shelly BLU Button](https://amzn.to/48Zejhw)** — Battery-powered Bluetooth button that can communicate directly with the Shelly Plus RGBW PM. Also comes in a "tough" version.
 - **[12V LED Lights](https://amzn.to/4sTrnfP)** — The lights I use in my van.
-- **Wall Switch** - Many different options depending on the configuration you want. I'll go more into this later
+- **Wall Switch** - Many different options depending on the configuration you want. I'll go into this more later
 
 ## Light Wiring
 
@@ -36,7 +41,7 @@ Connect the **+** side of your lights directly to 12V/24V power and the **-** si
 
 Once the wiring is done and the power has been turned back on, it's time to set up the Shelly. The Shelly automatically starts up in Access Point mode with an SSID that starts with "ShellyPlusRGBWPM". Connect to this network, then in a web browser navigate to http://192.168.33.1/ to access the Shelly web interface.
 
-If you have wifi in your Van or a hotspot, you can connect the Shelly by going to Settings -> Wifi and entering your wifi details. Once the Shelly connects, you can see the IPv4 address in the Wi-Fi status section:
+If you have wifi in your van or a hotspot, you can connect the Shelly by going to Settings -> Wifi and entering your wifi details. Once the Shelly connects, you can see the IPv4 address in the Wi-Fi status section:
 
 ![Wi-Fi Status](../../assets/img/standalone/wifi_status.png)
 
@@ -44,7 +49,7 @@ Copy this IP address, then you can disconnect from the Shelly network and reconn
 
 ## Configure the Shelly for your lights
 
-The default configuration for the shelly is for RGBW mode, so we need to reconfigure it for Lights x4 mode. Go to Settings -> Device Profile, select "Lights x 4" and click "Save settings"
+The default configuration for the Shelly is for RGBW mode, so we need to reconfigure it for Lights x4 mode. Go to Settings -> Device Profile, select "Lights x 4" and click "Save settings"
 
 ![Device Profile](../../assets/img/standalone/device_profile.png)
 
@@ -53,7 +58,7 @@ Back on the home page, you should now see 4 lights corresponding to the 4 channe
 There are some other settings you can configure now for your lights. Most settings are accessed by clicking on an individual light. These are the settings I adjusted:
 - Transition duration: This changes the speed at which the lights turn on and off for a fading effect. I set this to 0.5 seconds
 - Minimum brightness on toggle: If the brightness is below this value when you toggle your lights on, the brightness is automatically increased to this value. I set this to 100 so when I use the BLU buttons to toggle the lights later, they will always power on to 100% unless I specify otherwise
-- High Frequency mode: If you notice a high pitched ringing noise coming from your lights when they are on, you can try enabling High Frequency mode. This can be found in the general device settings, and increases the PWM frequency used by the shelly
+- High Frequency mode: If you notice a high-pitched ringing noise coming from your lights when they are on, you can try enabling High Frequency mode. This can be found in the general device settings, and increases the PWM frequency used by the shelly
 
 ## Configuring the BLU button for remote control
 
@@ -62,7 +67,7 @@ The newer generation Shelly devices support direct BLU button control out of the
 I wrote the following script for my BLU button:
 [blue_button_control.js](https://github.com/CF209/Shelly-Scripts/blob/main/blu_button_control.js)
 
-To use the script, first find the MAC address for your BLU button. This can easily done with the [Shelly BLE Debug app](https://play.google.com/store/apps/details?id=cloud.shelly.bledebug&pcampaignid=web_share). Open the app, give it bluetooth permissions, then simply press your BLU button and it should appear in the app along with the MAC address. Copy this MAC address into BUTTON_MAC variable in the script here:
+To use the script, first find the MAC address for your BLU button. This can easily be done with the [Shelly BLE Debug app](https://play.google.com/store/apps/details?id=cloud.shelly.bledebug&pcampaignid=web_share). Open the app, give it bluetooth permissions, then simply press your BLU button and it should appear in the app along with the MAC address. Copy this MAC address into BUTTON_MAC variable in the script here:
 ```javascript
 // Replace with your BLU Button's MAC address (lowercase)
 let BUTTON_MAC = "7c:c6:b6:9e:7b:42";
@@ -135,7 +140,7 @@ The first step was to figure out how my dimmer switch works. I know it uses PWM,
 
 ![Dimmer Switch Internal Circuit](../../assets/img/standalone/dimmer_circuit.png)
 
-The light power wire is always connected to 12V unless the switch is in the fully off position. The light ground wire is connected to ground through a mosfet which switches on and off with the PWM signal to control the brightness.
+The light power wire is always connected to 12V unless the switch is in the fully off position. The light ground wire is connected to ground through a MOSFET which switches on and off with the PWM signal to control the brightness.
 
 With the above info, I thought that maybe I could connect the ground output from the dimmer switch directly to the Shelly's analog input. The PWM switching from the dimmer switch would ideally create an average voltage relative to the PWM duty cycle at the analog input which could be converted to brightness. Here is what the circuit would then look like:
 ![Shelly wired with PWM dimmer switch](../../assets/img/standalone/pwm_wiring.png)
@@ -149,7 +154,7 @@ On the Shelly side, I needed to then configure the analog inputs. From the web i
 The initial results from this were mixed. The input values were relatively stable when they got close to 0% or 100%, but in the middle range there was a terrible amount of noise that would cause the brightness to jump all over the place. I could leave the dimmer switch in the same position, and the input value readings would jump as much as 25%. The Shelly input has the ability to set a Delta threshold to account for some noise, but with the large jumps, this wouldn't work for smooth dimming.
 
 As a partial solution for now, I changed the input mode to "Detached" so that the Shelly wouldn't automatically change the light brightness from the input, then wrote a script to take the input and control the light. [The script can be found here](https://github.com/CF209/Shelly-Scripts/blob/main/pwm_input_handling.js) (note this script was written by AI) and does the following:
-- At the extremes where the input appears to be stable (below 5% or above 95%), automatically set the light to 0% or 100% brightness respectfully
+- At the extremes where the input appears to be stable (below 5% or above 95%), automatically set the light to 0% or 100% brightness respectively
 - In between these values, it has the concept of a stability window where if the input stays in the same window for a certain number of readings, it considers it to be stable and locks the brightness at that level until the input reading leaves the stability window again. This prevents the light from continuously changing brightness from noise
 - I also added a lookup table with preset brightness values for more gradual dimming since changes closer to 100% are much less noticeable than changes closer to 0%. This can be seen here:
 ```javascript
